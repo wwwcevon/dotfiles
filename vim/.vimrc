@@ -96,18 +96,33 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+" customization
+
+" set columns=124
+" set lines=40
 set number
 set nobackup
 set smartindent
 set expandtab
 set sts=4
 set sw=4
-set t_Co=256
+if &term =~ 'xterm'
+    " X11
+    set t_Co=256
+    color molokai
+else
+    " tty
+    color ron
+endif
+if has('gui')
+    " gvim
+    set t_Co=256
+    color molokai
+endif
 set laststatus=2
 set showtabline=2
 " set spell
 " color ron
-color molokai
 
 helptags ~/.vim/doc
 
@@ -117,6 +132,8 @@ if v:version > 702
     set undodir=~/.undo
 endif
 
+set tags=tags
+
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 map <S-F5> <Esc>:EnableFastPHPFolds<Cr> 
 map <S-F6> <Esc>:EnablePHPFolds<Cr> 
@@ -124,6 +141,12 @@ map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <F2> <Esc>:NERDTree<Cr>
 map <F3> <Esc>:TlistToggle<Cr>
 map <F4> <Esc>:TaskList<Cr>
+map <F12> <Esc>:IndentGuidesToggle<Cr>
 inoremap <C-P> <ESC>:call PhpDocSingle()<CR>
 nnoremap <C-P> :call PhpDocSingle()<CR>
 vnoremap <C-P> :call PhpDocRange()<CR> 
+
+" indent guide color setting
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#696969 ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#8B8B83 ctermbg=238
