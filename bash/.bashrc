@@ -22,7 +22,7 @@ alias ssh='ssh -A'
 function parse_git_branch_and_add_brackets {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/'
 }
-PS1='\[\e[1;32m\]\u\[\e[m\]@\[\e[1;35m\]\h:\[\e[0m\e[1;34m\]\W\[\e[m\]$\[\e[1;31m\]$(parse_git_branch_and_add_brackets)\[\e[m\] '
+PS1='\[\e[1;32m\]\u\[\e[m\]@\[\e[1;35m\]\h:\[\e[0m\e[1;34m\]\W\[\e[m\]\$\[\e[1;31m\]$(parse_git_branch_and_add_brackets)\[\e[m\] '
 
 # /usr/bin/keychain $HOME/.ssh/id_dsa
 # . $HOME/.keychain/$HOSTNAME-sh
