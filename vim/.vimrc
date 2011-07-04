@@ -145,6 +145,11 @@ map <F12> <Esc>:IndentGuidesToggle<Cr>
 inoremap <C-P> <ESC>:call PhpDocSingle()<CR>
 nnoremap <C-P> :call PhpDocSingle()<CR>
 vnoremap <C-P> :call PhpDocRange()<CR> 
+nmap <SPACE> <SPACE>:noh<CR>
+" autoindent the code
+map <C-S-j> <Esc>gg=G
+" bother when editing a system file without root access?
+cmap w!! %!sudo tee > /dev/null %
 
 " indent guide color setting
 let g:indent_guides_auto_colors = 0
