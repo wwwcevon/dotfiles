@@ -110,14 +110,13 @@ if &term =~ 'xterm'
     " X11
     set t_Co=256
     color molokai
-else
-    " tty
-    color ron
-endif
-if has('gui')
+elseif &term =~ 'builtin_gui'
     " gvim
     set t_Co=256
     color molokai
+else
+    " tty
+    color ron
 endif
 set laststatus=2
 set showtabline=2
@@ -134,24 +133,29 @@ endif
 
 set tags=tags
 
+" set autocomplete
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-map <S-F5> <Esc>:EnableFastPHPFolds<Cr> 
-map <S-F6> <Esc>:EnablePHPFolds<Cr> 
-map <S-F7> <Esc>:DisablePHPFolds<Cr>
+set completeopt=longest,menu
+
 map <F2> <Esc>:NERDTree<Cr>
 map <F3> <Esc>:TlistToggle<Cr>
 map <F4> <Esc>:TaskList<Cr>
-map <F12> <Esc>:IndentGuidesToggle<Cr>
+map <S-F5> <Esc>:EnableFastPHPFolds<Cr> 
+map <S-F6> <Esc>:EnablePHPFolds<Cr> 
+map <S-F7> <Esc>:DisablePHPFolds<Cr>
+map <S-F12> <Esc>:IndentGuidesToggle<Cr>
+map <C-c> <Esc>:qa<Cr>
 inoremap <C-P> <ESC>:call PhpDocSingle()<CR>
 nnoremap <C-P> :call PhpDocSingle()<CR>
 vnoremap <C-P> :call PhpDocRange()<CR> 
 nmap <SPACE> <SPACE>:noh<CR>
 " autoindent the code
 map <C-S-j> <Esc>gg=G
+
 " bother when editing a system file without root access?
 cmap w!! %!sudo tee > /dev/null %
 
 " indent guide color setting
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#696969 ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#8B8B83 ctermbg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=238
