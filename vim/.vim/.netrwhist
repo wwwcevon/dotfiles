@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/srv/http/pmt'
 let g:netrw_dirhist_2='/home/chenlei/translation'
 let g:netrw_dirhist_3='/srv/http/pmt/app-pmt/controller/ajax'
@@ -8,3 +8,4 @@ let g:netrw_dirhist_5='/srv/http/pmt/app-common/classes/bll/Base.php'
 let g:netrw_dirhist_6='/home/chenlei/.vim'
 let g:netrw_dirhist_7='/tmp'
 let g:netrw_dirhist_8='/srv/http/pmt'
+let g:netrw_dirhist_9='/etc/nginx/conf/hosts'
