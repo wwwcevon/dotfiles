@@ -109,14 +109,16 @@ set sw=4
 if &term =~ 'xterm'
     " X11
     set t_Co=256
-    color molokai
+    " color molokai
+    color nature 
 elseif &term =~ 'builtin_gui'
     " gvim
     set t_Co=256
-    color molokai
+    " color molokai
+    color nature 
 else
     " tty
-    color ron
+    color nature
 endif
 set laststatus=2
 set showtabline=2
