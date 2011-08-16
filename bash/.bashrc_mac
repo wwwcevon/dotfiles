@@ -1,0 +1,47 @@
+
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+if [ "$PS1" ]; then
+    complete -cf sudo
+fi
+
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
+# export PATH=/usr/local/share/pyhon:$PATH:~/bin
+
+export PHPPATH="/usr/local/php5/bin"
+export PATH=$PHPPATH:$PATH
+
+export EDITOR=vim
+
+alias ll='ls -lAFh'
+alias grep='grep --color'
+alias l='ls'
+alias ssh='ssh -A'
+alias php='/usr/local/php5/bin/php'
+alias vim='/usr/local/bin/mvim'
+
+function parse_git_branch_and_add_brackets {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/'
+}
+function parse_git {
+    output=$(__git_ps1 "[%s]")
+    if [ $output ]; then
+        echo " "$output
+    fi
+}
+PS1='\[\e[1;32m\]\u\[\e[m\]@\[\e[1;35m\]\h:\[\e[0m\e[1;34m\]\W\[\e[m\]\$\[\e[1;31m\]$(parse_git)\[\e[m\] '
+
+# bash completion for homebrew on mac os x
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
+if [ -f $HOME/.ssh/id_rsa ]; then
+    /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
+    /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
+    /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
+    . $HOME/.keychain/$HOSTNAME-sh
+fi
+
+export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
