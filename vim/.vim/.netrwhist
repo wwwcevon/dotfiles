@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/srv/http/moin/wiki'
 let g:netrw_dirhist_2='/home/chenlei/projects/python/Fib.py'
+let g:netrw_dirhist_3='/Users/aleiphoenix/projects/ODS/src/python/ods.py'
+let g:netrw_dirhist_4='/Users/aleiphoenix/projects/ODS/src/python/configreader'
+let g:netrw_dirhist_5='/Users/aleiphoenix/projects/ODS/src/python/zmqhelper'
+let g:netrw_dirhist_6='/Users/aleiphoenix/Documents/Sysdev/Week34.todo.list'
