@@ -1,0 +1,52 @@
+if [[ $- != *i* ]] ; then
+    # Shell is non-interactive.  Be done now!
+    return
+fi
+
+
+# Put your fun stuff here.
+
+if [ "$PS1" ]; then
+    complete -cf sudo
+fi
+
+# # export default input method
+# export GTK_IM_MODULE=ibus
+# export XMODIFIERS=@im=ibus
+# export QT_IM_MODULE=ibus
+
+# export PATH var
+export PATH=$PATH:~/bin
+
+# set default editor
+export EDITOR=/usr/bin/vim
+
+# aliases
+alias ll='ls -lAFh'
+alias grep='grep --color'
+alias ls='ls --color=auto'
+alias l='ls --color=auto'
+alias mysql='mysql --default-character-set=utf8 --auto-rehash'
+alias ssh='ssh -AX'
+
+# # for chromium swithy!
+# export GNOME_DESKTOP_SESSION_ID=Default
+
+export HISTCONTROL=ingoreboth
+export HISTSIZE=1000000
+
+# load functions
+source $HOME/.bash_functions
+
+# normal PS1
+export PS1="\u@\h \W \$ "
+
+if [ $(function_exists __git_ps1) == 'function' ]; then
+    export PS1='$(is_root)\[\e[1;31m\]\h\[\e[m\] \[\e[0m\e[1;34m\]\W \$\[\e[m\]\[\e[1;31m\]$(parse_git)\[\e[m\] '
+fi
+
+# if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
+#     /usr/bin/keychain -q $HOME/.ssh/id_rsa
+#     . $HOME/.keychain/$HOSTNAME-sh
+# fi
+
