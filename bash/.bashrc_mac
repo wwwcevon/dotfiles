@@ -6,42 +6,60 @@ if [ "$PS1" ]; then
     complete -cf sudo
 fi
 
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
-# export PATH=/usr/local/share/pyhon:$PATH:~/bin
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
+export PATH=$PATH:~/bin
+
+# check for gentoo prefix
+gentoo_bash="/Users/aleiphoenix/Gentoo/bin/bash"
+if [ $SHELL == $gentoo_bash ]; then
+    export EPREFIX=$HOME/Gentoo
+    export PATH=$EPREFIX/usr/bin:$EPREFIX/usr/sbin:$EPREFIX/bin:$EPREFIX/tmp/usr/bin:$EPREFIX/tmp/bin:/sbin:$PATH
+fi
+
+# # specify the python
+# export PYTHONPATH=/usr/local/lib/python
+# alias python=/usr/local/bin/python
+# export PYTHONPATH=/usr/local/lib/python
 
 export PHPPATH="/usr/local/php5/bin"
-export PATH=$PHPPATH:$PATH
+export NODE_PATH="/usr/local/lib/node"
 
 export EDITOR=vim
 
-alias ll='ls -lAFh'
+# color for ls in terminal
+export CLICOLOR=1
+# export LSCOLORS=fxfxcxdxbxegedabagacad
+
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
+alias ll='ls -lAFhG'
 alias grep='grep --color'
+alias ls="ls"
 alias l='ls'
 alias ssh='ssh -A'
 alias php='/usr/local/php5/bin/php'
-alias vim='/usr/local/bin/mvim'
-
-function parse_git_branch_and_add_brackets {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/'
-}
-function parse_git {
-    output=$(__git_ps1 "[%s]")
-    if [ $output ]; then
-        echo " "$output
-    fi
-}
-PS1='\[\e[1;32m\]\u\[\e[m\]@\[\e[1;35m\]\h:\[\e[0m\e[1;34m\]\W\[\e[m\]\$\[\e[1;31m\]$(parse_git)\[\e[m\] '
+# alias vim='/usr/local/bin/mvim'
+# alias vi="/usr/bin/vim"
 
 # bash completion for homebrew on mac os x
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
-if [ -f $HOME/.ssh/id_rsa ]; then
-    /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
-    . $HOME/.keychain/$HOSTNAME-sh
-fi
+# source $HOME/.bash_functions
 
-export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+# normal PS1
+export PS1="\u@\h \W \$ "
+
+# if [ $(function_exists __git_ps1) == 'function' ]; then
+#    export PS1='$(is_root)\[\e[1;31m\]\h\[\e[m\] \[\e[0m\e[1;34m\]\W \$\[\e[m\]\[\e[1;32m\]$(parse_git)\[\e[m\] '
+# fi
+
+# if [ -f $HOME/.ssh/id_rsa ]; then
+#     /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
+#     /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
+#     /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
+#     . $HOME/.keychain/$HOSTNAME-sh
+# fi
+

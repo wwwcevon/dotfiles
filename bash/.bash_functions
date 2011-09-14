@@ -90,6 +90,27 @@ __git_ps1 ()
     fi
 }
 
+__gitdir () 
+{ 
+    if [ -z "${1-}" ]; then
+        if [ -n "${__git_dir-}" ]; then
+            echo "$__git_dir";
+        else
+            if [ -d .git ]; then
+                echo .git;
+            else
+                git rev-parse --git-dir 2> /dev/null;
+            fi;
+        fi;
+    else
+        if [ -d "$1/.git" ]; then
+            echo "$1/.git";
+        else
+            echo "$1";
+        fi;
+    fi
+}
+
 function parse_git_branch_and_add_brackets {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/';
 }
