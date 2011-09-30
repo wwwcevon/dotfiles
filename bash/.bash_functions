@@ -118,7 +118,7 @@ function parse_git_branch_and_add_brackets {
 function parse_git {
     output=$(__git_ps1 "[%s]")
     if [ $output ]; then
-        echo " "$output
+        echo " $output"
     fi
 }
 

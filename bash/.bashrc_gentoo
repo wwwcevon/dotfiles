@@ -10,10 +10,10 @@ if [ "$PS1" ]; then
     complete -cf sudo
 fi
 
-# # export default input method
-# export GTK_IM_MODULE=ibus
-# export XMODIFIERS=@im=ibus
-# export QT_IM_MODULE=ibus
+# export default input method
+export GTK_IM_MODULE=scim
+export XMODIFIERS=@im=SCIM
+export QT_IM_MODULE=scim
 
 # export PATH var
 export PATH=$PATH:~/bin
@@ -36,13 +36,13 @@ export HISTCONTROL=ingoreboth
 export HISTSIZE=1000000
 
 # load functions
-source $HOME/.bash_functions
+. $HOME/.bash_functions
 
 # normal PS1
 export PS1="\u@\h \W \$ "
 
 if [ $(function_exists __git_ps1) == 'function' ]; then
-    export PS1='$(is_root)\[\e[1;31m\]\h\[\e[m\] \[\e[0m\e[1;34m\]\W \$\[\e[m\]\[\e[1;31m\]$(parse_git)\[\e[m\] '
+    export PS1='\[\033[01;32m\]$(is_root)\[\033[00m\]\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\]\[\033[1;33m\]$(parse_git)\[\033[0m\] '
 fi
 
 # if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
