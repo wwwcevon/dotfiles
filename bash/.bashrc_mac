@@ -1,13 +1,5 @@
-
 # Check for an interactive session
 [ -z "$PS1" ] && return
-
-if [ "$PS1" ]; then
-    complete -cf sudo
-fi
-
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
-export PATH=$PATH:~/bin
 
 # check for gentoo prefix
 gentoo_bash="/Users/aleiphoenix/Gentoo/bin/bash"
@@ -16,50 +8,81 @@ if [ $SHELL == $gentoo_bash ]; then
     export PATH=$EPREFIX/usr/bin:$EPREFIX/usr/sbin:$EPREFIX/bin:$EPREFIX/tmp/usr/bin:$EPREFIX/tmp/bin:/sbin:$PATH
 fi
 
-# # specify the python
-# export PYTHONPATH=/usr/local/lib/python
-# alias python=/usr/local/bin/python
-# export PYTHONPATH=/usr/local/lib/python
+# path
+# export PATH="/usr/local/bin:/usr/local/sbin:"$PATH
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
 
-export PHPPATH="/usr/local/php5/bin"
-export NODE_PATH="/usr/local/lib/node"
+# CHOST for Mac OS X
+CFLAGS='-arch x86_64 -g -O2 -pipe -no-cpp-precomp'
+CXXFLAGS='-arch x86_64 -g -O2 -pipe'
+LDFLAGS='-arch x86_64 -bind_at_load'
 
-export EDITOR=vim
+# bash completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
+# colorsvn
+/usr/local/etc/profile.d/colorsvn-env.sh
 
 # color for ls in terminal
 export CLICOLOR=1
 # export LSCOLORS=fxfxcxdxbxegedabagacad
 
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
+# check for pythonbrew
+[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 
+# add ssh key
+if [ -f $HOME/.ssh/id_rsa ]; then
+    /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
+    . $HOME/.keychain/$HOSTNAME-sh
+fi
+
+# alias
+alias ipy="env ipython"
+alias svn="env colorsvn"
 alias ll='ls -lAFhG'
 alias grep='grep --color'
 alias ls="ls"
 alias l='ls'
 alias ssh='ssh -A'
-alias php='/usr/local/php5/bin/php'
-# alias vim='/usr/local/bin/mvim'
-# alias vi="/usr/bin/vim"
+alias viphpini='vim /usr/local/etc/php/php.ini'
 
-# bash completion for homebrew on mac os x
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+if [ "$PS1" ]; then
+    complete -cf sudo
 fi
 
-# source $HOME/.bash_functions
+export NODE_PATH="/usr/local/lib/node"
+
+export EDITOR=vim
+
+
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
+[ -f $HOME/.bash_functions ] && . $HOME/.bash_functions
 
 # normal PS1
 export PS1="\u@\h \W \$ "
 
-# if [ $(function_exists __git_ps1) == 'function' ]; then
-#    export PS1='$(is_root)\[\e[1;31m\]\h\[\e[m\] \[\e[0m\e[1;34m\]\W \$\[\e[m\]\[\e[1;32m\]$(parse_git)\[\e[m\] '
-# fi
+if [ $(function_exists __git_ps1) == 'function' ]; then
+   export PS1='$(is_root)\[\e[1;31m\]\h\[\e[m\] \[\e[0m\e[1;34m\]\W \$\[\e[m\]\[\e[1;32m\]$(parse_git)\[\e[m\] '
+fi
 
-# if [ -f $HOME/.ssh/id_rsa ]; then
-#     /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
-#     /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
-#     /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
-#     . $HOME/.keychain/$HOSTNAME-sh
-# fi
+if [ -f $HOME/.ssh/id_rsa ]; then
+    /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
+    /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
+    /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
+    . $HOME/.keychain/$HOSTNAME-sh
+fi
 
+# for alternative php
+if [ -d '/usr/local/php-5.3.8' ]; then
+    export PATH='/usr/local/php-5.3.8/bin:/usr/local/php-5.3.8/sbin:'$PATH
+fi
+
+# Load RVM function
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+
+# perlbrew
+[[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"

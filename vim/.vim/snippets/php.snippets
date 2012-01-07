@@ -145,13 +145,15 @@ snippet doc_i
 snippet class
 	/**
 	 * ${1}
+	 *
+	 * @package ${2:PackageName}
+	 * @author  AleiPhoenix <aleiphoenix@gmail.com>
+	 * @since   Version ${3:Version}
 	 **/
-	class ${2:ClassName}
-	{
-		${3}
-		function ${4:__construct}(${5:argument})
-		{
-			${6:// code...}
+	class ${4:ClassName} {
+
+		function ${5:__construct}(${6:argument}) {
+			${7:// code...}
 		}
 	}
 # define(...)

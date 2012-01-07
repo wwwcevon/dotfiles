@@ -117,7 +117,7 @@ elseif &term =~ 'builtin_gui'
     color molokai
     " color nature 
 else
-    tty
+    " tty
     " color nature
 endif
 set laststatus=2
@@ -161,3 +161,6 @@ cmap w!! %!sudo tee > /dev/null %
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=238
+autocmd FileType php setlocal textwidth=78
+autocmd FileType python setlocal textwidth=78
+
