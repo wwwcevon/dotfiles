@@ -128,7 +128,31 @@ function function_exists {
 
 function is_root {
     if [ $UID == 0 ]; then
-        echo -e "\e[1;32m(root)\e[m"
+        echo "(root)"
     fi
+}
+
+function echored {
+    echo -e "\033[1;31m$@\033[0m"
+}
+
+function echogreen {
+    echo -e "\033[1;32m$@\033[0m"
+}
+
+function echoyellow {
+    echo -e "\033[1;33m$@\033[0m"
+}
+
+function printfred {
+    printf "\033[1;31m$1\033[0m\n"
+}
+
+function printfgreen {
+    printf "\033[1;32m$1\033[0m\n"
+}
+
+function printfyellow {
+    printf "\033[1;33m$1\033[0m\n"
 }
 
