@@ -164,3 +164,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=238
 autocmd FileType php setlocal textwidth=78
 autocmd FileType python setlocal textwidth=78
 
+" auto remove tailing spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
