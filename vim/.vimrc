@@ -44,7 +44,7 @@ inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-  set mouse=a
+  set mouse=v
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
@@ -110,12 +110,12 @@ if &term =~ 'xterm'
     " X11
     set t_Co=256
     color molokai
-    " color nature 
+    " color nature
 elseif &term =~ 'builtin_gui'
     " gvim
     set t_Co=256
     color molokai
-    " color nature 
+    " color nature
 else
     " tty
     " color nature
@@ -142,14 +142,14 @@ set completeopt=longest,menu
 map <F2> <Esc>:NERDTree<Cr>
 map <F3> <Esc>:TlistToggle<Cr>
 map <F4> <Esc>:TaskList<Cr>
-map <S-F5> <Esc>:EnableFastPHPFolds<Cr> 
-map <S-F6> <Esc>:EnablePHPFolds<Cr> 
+map <S-F5> <Esc>:EnableFastPHPFolds<Cr>
+map <S-F6> <Esc>:EnablePHPFolds<Cr>
 map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
 map <C-c> <Esc>:qa<Cr>
 inoremap <C-P> <ESC>:call PhpDocSingle()<CR>
 nnoremap <C-P> :call PhpDocSingle()<CR>
-vnoremap <C-P> :call PhpDocRange()<CR> 
+vnoremap <C-P> :call PhpDocRange()<CR>
 nmap <SPACE> <SPACE>:noh<CR>
 " autoindent the code
 map <C-S-j> <Esc>gg=G
