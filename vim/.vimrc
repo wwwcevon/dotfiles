@@ -65,20 +65,20 @@ if has("autocmd")
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
-  au!
+    au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+    " For all text files set 'textwidth' to 78 characters.
+    autocmd FileType text setlocal textwidth=78
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    autocmd BufReadPost *
+          \ if line("'\"") > 1 && line("'\"") <= line("$") |
+          \   exe "normal! g`\"" |
+          \ endif
 
   augroup END
 
@@ -93,7 +93,7 @@ endif " has("autocmd")
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+        \ | wincmd p | diffthis
 endif
 
 " customization
@@ -104,21 +104,19 @@ set number
 set nobackup
 set smartindent
 set expandtab
-set sts=4
-set sw=4
+set sts=2
+set sw=2
 if &term =~ 'xterm'
-    " X11
-    set t_Co=256
-    color molokai
-    " color nature
+  " X11
+  set t_Co=256
+  color molokai
 elseif &term =~ 'builtin_gui'
-    " gvim
-    set t_Co=256
-    color molokai
-    " color nature
+  " gvim
+  set t_Co=256
+  color molokai
 else
-    " tty
-    " color nature
+  " tty
+  " color nature
 endif
 set laststatus=2
 set showtabline=2
@@ -128,9 +126,9 @@ set showtabline=2
 helptags ~/.vim/doc
 
 if v:version > 702
-    "set persistant undo
-    set undofile
-    set undodir=~/.undo
+  "set persistant undo
+  set undofile
+  set undodir=~/.undo
 endif
 
 set tags=tags
@@ -147,12 +145,9 @@ map <S-F6> <Esc>:EnablePHPFolds<Cr>
 map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
 map <C-c> <Esc>:qa<Cr>
-inoremap <C-P> <ESC>:call PhpDocSingle()<CR>
-nnoremap <C-P> :call PhpDocSingle()<CR>
-vnoremap <C-P> :call PhpDocRange()<CR>
+nnoremap <S-p> :call PhpDocSingle()<CR>
+vnoremap <S-p> :call PhpDocRange()<CR>
 nmap <SPACE> <SPACE>:noh<CR>
-" autoindent the code
-map <C-S-j> <Esc>gg=G
 
 " bother when editing a system file without root access?
 cmap w!! %!sudo tee > /dev/null %
@@ -161,8 +156,17 @@ cmap w!! %!sudo tee > /dev/null %
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=238
-autocmd FileType php setlocal textwidth=78
-autocmd FileType python setlocal textwidth=78
+autocmd FileType php setlocal sts=4 sw=4
+autocmd FileType python setlocal sts=4 sw=4
+
+" remove trailing spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" set leader
+let leader = ','
+
+" no auto-fold when open file
+autocmd BufNewFile,BufRead * setlocal nofoldenable
 
 " auto remove tailing spaces
 autocmd BufWritePre * :%s/\s\+$//e

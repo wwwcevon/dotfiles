@@ -223,5 +223,12 @@ snippet fun
 # $... = array (...)
 snippet array
 	$${1:arrayName} = array('${2}' => ${3});${4}
+snippet try
+	try {
+	    ${1: // code}
+	}
+	catch (${2: Exception} ${3: $e}) {
+	    ${4: // error handing}
+	}
 snippet vd
 	var_dump($${1:varName});
