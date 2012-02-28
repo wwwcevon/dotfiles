@@ -116,7 +116,6 @@ elseif &term =~ 'builtin_gui'
   color molokai
 else
   " tty
-  " color nature
 endif
 set laststatus=2
 set showtabline=2
@@ -145,8 +144,6 @@ map <S-F6> <Esc>:EnablePHPFolds<Cr>
 map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
 map <C-c> <Esc>:qa<Cr>
-nnoremap <S-p> :call PhpDocSingle()<CR>
-vnoremap <S-p> :call PhpDocRange()<CR>
 nmap <SPACE> <SPACE>:noh<CR>
 
 " bother when editing a system file without root access?
@@ -159,6 +156,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=238
 autocmd FileType php setlocal sts=4 sw=4
 autocmd FileType python setlocal sts=4 sw=4
 
+" php folding
+let php_folding=0
+source $HOME/.vim/plugin/phpfolding.vim
+
 " remove trailing spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -167,7 +168,4 @@ let leader = ','
 
 " no auto-fold when open file
 autocmd BufNewFile,BufRead * setlocal nofoldenable
-
-" auto remove tailing spaces
-autocmd BufWritePre * :%s/\s\+$//e
 
