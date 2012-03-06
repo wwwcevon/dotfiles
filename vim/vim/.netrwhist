@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/aleiphoenix/projects/python/ams/logger'
+let g:netrw_dirhist_2='/Users/aleiphoenix/projects/python/sys/unbuffered'
+let g:netrw_dirhist_3='/Users/aleiphoenix/projects/anjuke/poi/README.md'
+let g:netrw_dirhist_4='/Volumes/NO NAME'
+let g:netrw_dirhist_5='/Users/aleiphoenix/Documents/Byte.Of.Python/.git'
+let g:netrw_dirhist_6='/Users/aleiphoenix/projects/php/Lophostrix/lophostrix'
+let g:netrw_dirhist_7='/private/etc/apache2/extra'
+let g:netrw_dirhist_8='/Users/aleiphoenix/projects/anjuke/soj/webapps/README.markdown'
+let g:netrw_dirhist_9='/private/tmp/poi-geogroup-rebuild/rebuild.php'
