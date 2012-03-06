@@ -169,3 +169,7 @@ let leader = ','
 " no auto-fold when open file
 autocmd BufNewFile,BufRead * setlocal nofoldenable
 
+" ctrlp remove default mapping
+let g:ctrlp_map = '<c-l>'
+
+
