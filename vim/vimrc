@@ -143,7 +143,9 @@ map <S-F5> <Esc>:EnableFastPHPFolds<Cr>
 map <S-F6> <Esc>:EnablePHPFolds<Cr>
 map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
+map <c-m> <Esc>:PhpDoc<Cr>
 map <C-c> <Esc>:qa<Cr>
+
 nmap <SPACE> <SPACE>:noh<CR>
 
 " bother when editing a system file without root access?
