@@ -6,5 +6,7 @@ if exists("g:ViTunesLoaded") || &cp || version < 700
   finish
 endif
 let g:vitunes_tool = '/Users/aleiphoenix/.rvm/gems/ruby-1.9.3-p0/gems/vitunes-0.4.8/lib/vitunes-tool-objc '
-source /Users/aleiphoenix/.rvm/gems/ruby-1.9.3-p0/gems/vitunes-0.4.8/lib/vitunes.vim
+if filereadable('/Users/aleiphoenix/.rvm/gems/ruby-1.9.3-p0/gems/vitunes-0.4.8/lib/vitunes.vim')
+  source /Users/aleiphoenix/.rvm/gems/ruby-1.9.3-p0/gems/vitunes-0.4.8/lib/vitunes.vim
+endif
 
