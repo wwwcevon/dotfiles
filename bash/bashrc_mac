@@ -13,9 +13,9 @@ fi
 export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
 
 # CHOST for Mac OS X
-CFLAGS='-arch x86_64 -g -O2 -pipe -no-cpp-precomp'
-CXXFLAGS='-arch x86_64 -g -O2 -pipe'
-LDFLAGS='-arch x86_64 -bind_at_load'
+CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
+CXXFLAGS="${CFLAGS}"
+LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
 
 # bash completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -44,7 +44,6 @@ alias grep='grep --color'
 alias ls="ls"
 alias l='ls'
 alias ssh='ssh -A'
-alias viphpini='vim /usr/local/etc/php/php.ini'
 alias tmux='/usr/bin/env tmux -2'
 
 [[ "command -v mvim" ]] && alias vim="mvim -v"
@@ -57,6 +56,7 @@ export NODE_PATH="/usr/local/lib/node"
 
 export EDITOR=vim
 
+export HISTSIZE="10000000"
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
@@ -78,7 +78,7 @@ if [ -f $HOME/.ssh/id_rsa ]; then
 fi
 
 # Load Alternative php
-[[ -d /usr/local/php-5.3.10 ]] && export PATH="/usr/local/php-5.3.10/bin:$PATH"
+[[ -d /usr/local/php-5.4.0 ]] && export PATH="/usr/local/php-5.4.0/bin:$PATH"
 
 # Load RVM function
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
@@ -87,7 +87,7 @@ fi
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"
 
 # android SDK
-[[ -d "$HOME/sources/android-sdk-macosx" ]] && export PATH="$HOME/sources/android-sdk-macosx/tools:$HOME/sources/android-sdk-macosx/platform-tools:$HOME/sources/android-sdk-macosx/platforms:$PATH"
+# [[ -d "$HOME/sources/android-sdk-macosx" ]] && export PATH="$HOME/sources/android-sdk-macosx/tools:$HOME/sources/android-sdk-macosx/platform-tools:$HOME/sources/android-sdk-macosx/platforms:$PATH"
 
 # eclipse
 [[ -d "$HOME/eclipse" ]] && export PATH="$HOME/eclipse:$PATH"

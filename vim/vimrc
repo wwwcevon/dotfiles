@@ -143,8 +143,13 @@ map <S-F5> <Esc>:EnableFastPHPFolds<Cr>
 map <S-F6> <Esc>:EnablePHPFolds<Cr>
 map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
-map <c-m> <Esc>:PhpDoc<Cr>
 map <C-c> <Esc>:qa<Cr>
+
+" php-doc
+source $HOME/.vim/plugin/php-doc.vim
+inoremap <C-i> <Esc>:call PhpDocSingle()<Cr>i
+nnoremap <C-i> <Esc>:call PhpDocSingle()<Cr>
+vnoremap <C-i> <Esc>:call PhpDocRange()<Cr>
 
 nmap <SPACE> <SPACE>:noh<CR>
 
@@ -155,7 +160,7 @@ cmap w!! %!sudo tee > /dev/null %
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=238
-autocmd FileType php setlocal sts=4 sw=4
+autocmd FileType php setlocal sts=4 sw=4 keywordprg=pman
 autocmd FileType python setlocal sts=4 sw=4
 autocmd FileType markdown setlocal sts=4 sw=4
 
@@ -167,7 +172,7 @@ source $HOME/.vim/plugin/phpfolding.vim
 autocmd BufWritePre * :%s/\s\+$//e
 
 " set leader
-let leader = ','
+let mapleader= ','
 
 " no auto-fold when open file
 autocmd BufNewFile,BufRead * setlocal nofoldenable
@@ -175,4 +180,7 @@ autocmd BufNewFile,BufRead * setlocal nofoldenable
 " ctrlp remove default mapping
 let g:ctrlp_map = '<c-l>'
 
+" highlight current line and column
+set cursorcolumn cursorline
+hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
