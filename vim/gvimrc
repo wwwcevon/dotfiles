@@ -1,0 +1,10 @@
+set t_Co=256
+color molokai
+set guifont=Menlo:h16
+set guifontwide="Hiragino Sans GB":h14
+set guioptions=c
+set columns=96
+set lines=36
+
+" autocmd VimEnter * NERDTree
+" autocmd VimEnter * wincmd p

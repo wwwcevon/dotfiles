@@ -117,6 +117,11 @@ elseif &term =~ 'builtin_gui'
 else
   " tty
 endif
+
+if has('gui_macvim')
+  set t_Co=256
+  color molokai
+endif
 set laststatus=2
 set showtabline=2
 " set spell
