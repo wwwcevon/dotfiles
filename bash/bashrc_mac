@@ -49,13 +49,13 @@ alias l='ls'
 alias ssh='ssh -A'
 alias tmux='/usr/bin/env tmux -2'
 
-[[ "command -v mvim" ]] && alias vim="mvim"
+[[ "command -v mvim" ]] && alias vim="mvim" && alias vi="mvim"
 
 if [ "$PS1" ]; then
     complete -cf sudo
 fi
 
-export NODE_PATH="/usr/local/lib/node"
+export NODE_PATH="/usr/local/lib/node_modules"
 
 export EDITOR=mvim
 
@@ -64,14 +64,9 @@ export HISTSIZE="10000000"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-[ -f $HOME/.bash_functions ] && . $HOME/.bash_functions
 
 # normal PS1
 export PS1="\u@\h \W \$ "
-
-if [ $(function_exists __git_ps1) == 'function' ]; then
-   export PS1='\[\033[01;33m\]$(is_root)\[\e[00m\]\[\033[01;31m\]\h\[\033[00m\] \[\033[01;34m\]\W \$\[\033[00m\]\[\033[01;32m\]$(parse_git)\[\033[00m\] '
-fi
 
 if [ -f $HOME/.ssh/id_rsa ]; then
     /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
@@ -80,11 +75,11 @@ if [ -f $HOME/.ssh/id_rsa ]; then
     . $HOME/.keychain/$HOSTNAME-sh
 fi
 
-# Load Alternative php
+# Load alternative php
 [[ -d /usr/local/php-5.4.0 ]] && export PATH="/usr/local/php-5.4.0/bin:$PATH"
 
 # Load RVM function
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && export PATH="$HOME/.rvm/bin:$PATH"
 
 # perlbrew
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"
@@ -93,7 +88,17 @@ fi
 # [[ -d "$HOME/sources/android-sdk-macosx" ]] && export PATH="$HOME/sources/android-sdk-macosx/tools:$HOME/sources/android-sdk-macosx/platform-tools:$HOME/sources/android-sdk-macosx/platforms:$PATH"
 
 # eclipse
-[[ -d "$HOME/eclipse" ]] && export PATH="$HOME/eclipse:$PATH"
+# [[ -d "$HOME/eclipse" ]] && export PATH="$HOME/eclipse:$PATH"
 
 # check for pythonbrew
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
+
+# check for phpbrew
+[[ -e $HOME/.phpbrew/scripts/phpbrew ]] && source $HOME/.phpbrew/scripts/phpbrew
+
+[ -f $HOME/.bash_functions ] && . $HOME/.bash_functions
+
+if [ $(function_exists __git_ps1) == 'function' ]; then
+   export PS1='\[\033[01;33m\]$(is_root)\[\e[00m\]\[\033[01;31m\]\h\[\033[00m\] \[\033[01;34m\]\W \$\[\033[00m\] \[\033[01;33m\]$(__ruby_version)\[\033[00m\]\[\033[01;32m\]$(parse_git)\[\033[00m\]'
+fi
+

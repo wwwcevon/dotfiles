@@ -1,10 +1,17 @@
 set t_Co=256
-color molokai
-set guifont=Menlo:h16
+" color molokai
+color ir_black
+set guifont=Menlo:h14
 set guifontwide="Hiragino Sans GB":h14
 set guioptions=c
-set columns=96
-set lines=36
+set columns=240
+set lines=64
+
+nnoremap + <C-w>>
+nnoremap - <C-w><
+
+nnoremap <leader>144 :set columns=144<Cr> <C-w>=
+" autocmd WinEnter * set columns=144<Cr> <C-w>=
 
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p

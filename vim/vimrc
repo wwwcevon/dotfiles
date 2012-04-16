@@ -109,18 +109,21 @@ set sw=2
 if &term =~ 'xterm'
   " X11
   set t_Co=256
-  color molokai
+  " color molokai
+  color ir_black
 elseif &term =~ 'builtin_gui'
   " gvim
   set t_Co=256
-  color molokai
+  " color molokai
+  color ir_black
 else
   " tty
 endif
 
 if has('gui_macvim')
   set t_Co=256
-  color molokai
+  " color molokai
+  color ir_black
 endif
 set laststatus=2
 set showtabline=2
@@ -152,9 +155,9 @@ map <C-c> <Esc>:qa<Cr>
 
 " php-doc
 source $HOME/.vim/plugin/php-doc.vim
-inoremap <C-i> <Esc>:call PhpDocSingle()<Cr>i
-nnoremap <C-i> <Esc>:call PhpDocSingle()<Cr>
-vnoremap <C-i> <Esc>:call PhpDocRange()<Cr>
+" inoremap <C-i> <Esc>:call PhpDocSingle()<Cr>i
+" nnoremap <C-i> <Esc>:call PhpDocSingle()<Cr>
+" vnoremap <C-i> <Esc>:call PhpDocRange()<Cr>
 
 nmap <SPACE> <SPACE>:noh<CR>
 
