@@ -110,12 +110,12 @@ if &term =~ 'xterm'
   " X11
   set t_Co=256
   " color molokai
-  color ir_black
+  color jellybeans
 elseif &term =~ 'builtin_gui'
   " gvim
   set t_Co=256
   " color molokai
-  color ir_black
+  color jellybeans
 else
   " tty
 endif
@@ -123,7 +123,7 @@ endif
 if has('gui_macvim')
   set t_Co=256
   " color molokai
-  color ir_black
+  color jellybeans
 endif
 set laststatus=2
 set showtabline=2

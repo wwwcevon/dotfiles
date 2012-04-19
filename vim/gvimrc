@@ -1,11 +1,10 @@
 set t_Co=256
-" color molokai
-color ir_black
+color jellybeans
 set guifont=Menlo:h14
 set guifontwide="Hiragino Sans GB":h14
 set guioptions=c
-set columns=240
-set lines=64
+set columns=128
+set lines=36
 
 nnoremap + <C-w>>
 nnoremap - <C-w><
