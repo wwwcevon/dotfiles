@@ -1,3 +1,7 @@
+if filereadable($HOME . "/.gvimrc_before")
+  source $HOME/.gvimrc_before
+endif
+
 set t_Co=256
 color jellybeans
 set guifont=Menlo:h14
@@ -14,3 +18,6 @@ nnoremap <leader>144 :set columns=144<Cr> <C-w>=
 
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p
+if filereadable($HOME . "/.gvimrc_after")
+  source $HOME/.gvimrc_after
+endif

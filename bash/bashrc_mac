@@ -71,6 +71,7 @@ export PS1="\u@\h \W \$ "
 if [ -f $HOME/.ssh/id_rsa ]; then
     /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
     /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
+    /usr/local/bin/keychain -q $HOME/.ssh/gitcafe/id_rsa
     /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
     . $HOME/.keychain/$HOSTNAME-sh
 fi
@@ -79,7 +80,7 @@ fi
 [[ -d /usr/local/php-5.4.0 ]] && export PATH="/usr/local/php-5.4.0/bin:$PATH"
 
 # Load RVM function
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && export PATH="$HOME/.rvm/bin:$PATH"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # && export PATH="$HOME/.rvm/bin:$PATH"
 
 # perlbrew
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"

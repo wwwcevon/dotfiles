@@ -1,3 +1,6 @@
+if filereadable($HOME . "/.vimrc_before")
+  source $HOME/.vimrc_before
+endif
 
 " An example for a vimrc file.
 "
@@ -192,3 +195,6 @@ let g:ctrlp_map = '<c-l>'
 set cursorcolumn cursorline
 hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
+if filereadable($HOME . "/.vimrc_after")
+  source $HOME/.vimrc_after
+endif
