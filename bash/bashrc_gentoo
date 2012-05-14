@@ -29,6 +29,9 @@ alias l='ls --color=auto'
 alias mysql='mysql --default-character-set=utf8 --auto-rehash'
 alias ssh='ssh -AX'
 
+# mutt
+MAIL=/var/spool/mail/aleiphoenix && export MAIL
+
 # # for chromium swithy!
 # export GNOME_DESKTOP_SESSION_ID=Default
 
@@ -43,6 +46,9 @@ export NODE_PATH="/usr/local/lib/node_modules"
 
 # rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && export PATH="$HOME/.rvm/bin:$PATH"
+
+# pythonbrew
+[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 
 # load functions
 . $HOME/.bash_functions
