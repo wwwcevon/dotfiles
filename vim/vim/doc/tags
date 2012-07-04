@@ -416,6 +416,7 @@ conque-term-usage	conque_term.txt	/*conque-term-usage*
 conque-term-windows	conque_term.txt	/*conque-term-windows*
 conque-term-write	conque_term.txt	/*conque-term-write*
 conque-term-writeln	conque_term.txt	/*conque-term-writeln*
+cs	surround.txt	/*cs*
 ctrlp-changelog	ctrlp.txt	/*ctrlp-changelog*
 ctrlp-commands	ctrlp.txt	/*ctrlp-commands*
 ctrlp-contents	ctrlp.txt	/*ctrlp-contents*
@@ -428,6 +429,7 @@ ctrlp-options	ctrlp.txt	/*ctrlp-options*
 ctrlp-thanks	ctrlp.txt	/*ctrlp-thanks*
 ctrlp-user-config	ctrlp.txt	/*ctrlp-user-config*
 ctrlp.txt	ctrlp.txt	/*ctrlp.txt*
+ds	surround.txt	/*ds*
 g%	matchit.txt	/*g%*
 g:SuperTabCompletionContexts	supertab.txt	/*g:SuperTabCompletionContexts*
 g:SuperTabContextDefaultCompletionType	supertab.txt	/*g:SuperTabContextDefaultCompletionType*
@@ -479,6 +481,8 @@ g:tcommentMapLeaderOp2	tcomment.txt	/*g:tcommentMapLeaderOp2*
 g:tcommentOpModeExtra	tcomment.txt	/*g:tcommentOpModeExtra*
 g:tcommentOptions	tcomment.txt	/*g:tcommentOptions*
 g:tcommentSyntaxMap	tcomment.txt	/*g:tcommentSyntaxMap*
+i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
+i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*
 indent-guides	indent_guides.txt	/*indent-guides*
 indent-guides-about	indent_guides.txt	/*indent-guides-about*
@@ -579,6 +583,13 @@ supertab-options	supertab.txt	/*supertab-options*
 supertab-preventcomplete	supertab.txt	/*supertab-preventcomplete*
 supertab-usage	supertab.txt	/*supertab-usage*
 supertab.txt	supertab.txt	/*supertab.txt*
+surround	surround.txt	/*surround*
+surround-customizing	surround.txt	/*surround-customizing*
+surround-issues	surround.txt	/*surround-issues*
+surround-mappings	surround.txt	/*surround-mappings*
+surround-replacements	surround.txt	/*surround-replacements*
+surround-targets	surround.txt	/*surround-targets*
+surround.txt	surround.txt	/*surround.txt*
 taglist-commands	taglist.txt	/*taglist-commands*
 taglist-debug	taglist.txt	/*taglist-debug*
 taglist-extend	taglist.txt	/*taglist-extend*
@@ -605,7 +616,13 @@ tcomment#OperatorLine()	tcomment.txt	/*tcomment#OperatorLine()*
 tcomment#OperatorLineAnyway()	tcomment.txt	/*tcomment#OperatorLineAnyway()*
 tcomment-maps	tcomment.txt	/*tcomment-maps*
 tcomment.txt	tcomment.txt	/*tcomment.txt*
+vS	surround.txt	/*vS*
 v_[%	matchit.txt	/*v_[%*
 v_]%	matchit.txt	/*v_]%*
 v_a%	matchit.txt	/*v_a%*
 v_g%	matchit.txt	/*v_g%*
+vgS	surround.txt	/*vgS*
+yS	surround.txt	/*yS*
+ySS	surround.txt	/*ySS*
+ys	surround.txt	/*ys*
+yss	surround.txt	/*yss*

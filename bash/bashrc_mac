@@ -1,8 +1,8 @@
 # Check for an interactive session
-[ -z "$PS1" ] && exit
+# [[ $- != *i* ]] && exit
 
 # check for gentoo prefix
-gentoo_bash="/Users/aleiphoenix/Gentoo/bin/bash"
+gentoo_bash="$HOME/Gentoo/bin/bash"
 if [ $SHELL == $gentoo_bash ]; then
     export EPREFIX=$HOME/Gentoo
     export PATH=$EPREFIX/usr/bin:$EPREFIX/usr/sbin:$EPREFIX/bin:$EPREFIX/tmp/usr/bin:$EPREFIX/tmp/bin:/sbin:$PATH
@@ -10,17 +10,31 @@ fi
 
 # path
 # export PATH="/usr/local/bin:/usr/local/sbin:"$PATH
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
+PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
+# export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
 
 # CHOST for Mac OS X
-CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
+CHOST="x86_64-apple-darwin11.4.0"
+# CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
+CFLAGS='-arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
 CXXFLAGS="${CFLAGS}"
-LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
+# LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
+LDFLAGS='-arch x86_64 -bind_at_load'
 
 # bash completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
+
+# coreutils
+if [[ -s `brew --prefix coreutils`/libexec/gnubin ]]; then
+  PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+fi
+
+# colordiff
+# if [[ -n $()ommand -v colordiff ]]; then
+#   alias diff="colordiff -u"
+# fi
 
 # homebrew
 export HOMEBREW_TEMP="/usr/local/tmp"
