@@ -156,6 +156,8 @@ map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
 map <C-c> <Esc>:qa<Cr>
 
+set modeline
+
 " php-doc
 source $HOME/.vim/plugin/php-doc.vim
 " inoremap <C-i> <Esc>:call PhpDocSingle()<Cr>i
