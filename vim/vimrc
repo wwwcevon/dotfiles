@@ -155,6 +155,7 @@ map <S-F6> <Esc>:EnablePHPFolds<Cr>
 map <S-F7> <Esc>:DisablePHPFolds<Cr>
 map <S-F12> <Esc>:IndentGuidesToggle<Cr>
 map <C-c> <Esc>:qa<Cr>
+map <C-x> <Esc>:bd<Cr>
 
 set modeline
 
@@ -200,3 +201,23 @@ hi cursorline gui=UNDERLINE cterm=UNDERLINE
 if filereadable($HOME . "/.vimrc_after")
   source $HOME/.vimrc_after
 endif
+
+" per-subtree .vimrc
+function! FindAndSourceLocalVimrc()
+  if exists('g:inFindLocalVimrc')
+    return
+  endif
+  let g:inFindLocalVimrc=1
+
+  let v = findfile('.vimrc', getcwd() . ";")
+  if exists("v") && (v != "")
+    let v = fnamemodify(v, ':p')
+    if v != $MYVIMRC
+      exe "source " . v
+    endif
+  endif
+
+  unlet g:inFindLocalVimrc
+endfunction
+
+call FindAndSourceLocalVimrc()
