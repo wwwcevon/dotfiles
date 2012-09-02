@@ -198,9 +198,7 @@ let g:ctrlp_map = '<c-l>'
 set cursorcolumn cursorline
 hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
-if filereadable($HOME . "/.vimrc_after")
-  source $HOME/.vimrc_after
-endif
+set modeline
 
 " per-subtree .vimrc
 function! FindAndSourceLocalVimrc()
@@ -221,3 +219,8 @@ function! FindAndSourceLocalVimrc()
 endfunction
 
 call FindAndSourceLocalVimrc()
+
+if filereadable($HOME . "/.vimrc_after")
+  source $HOME/.vimrc_after
+endif
+

@@ -1,3 +1,5 @@
+[[ -s $HOME/.bashrc_gentoo_before ]] && . $HOME/.bashrc_gentoo_before
+
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
@@ -27,7 +29,7 @@ alias grep='grep --color'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias mysql='mysql --default-character-set=utf8 --auto-rehash'
-alias ssh='ssh -AX'
+alias ssh='ssh -A'
 
 # mutt
 MAIL=/var/spool/mail/aleiphoenix && export MAIL
@@ -45,7 +47,7 @@ export PS1="\u@\h \W \$ "
 export NODE_PATH="/usr/local/lib/node_modules"
 
 # rvm
-[[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && export PATH="$HOME/.rvm/bin:$PATH"
+[[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && unset RUBYOPT
 
 # pythonbrew
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
@@ -55,15 +57,20 @@ export NODE_PATH="/usr/local/lib/node_modules"
 
 
 if [ $(function_exists __git_ps1) == 'function' ]; then
-    export PS1='\[\033[01;32m\]$(is_root)\[\033[00m\]\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] \[\033[01;33m\]$(__ruby_version)\[\033[00m\]\[\033[01;32m\]$(parse_git)\[\033[0m\]'
+    export PS1='\[\033[01;32m\]$(is_root)\[\033[00m\]\[\033[01;31m\]\h\[\033[00m\]\[\033[01;34m\] \W \$\[\033[00m\] \[\033[01;33m\]$(__ruby_version)\[\033[00m\]\[\033[01;32m\]$(parse_git)\[\033[0m\]'
 fi
 
-if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
-    /usr/bin/keychain -q $HOME/.ssh/id_rsa
-    /usr/bin/keychain -q $HOME/.ssh/id_dsa
-    /usr/bin/keychain -q $HOME/.ssh/github/id_rsa
-    /usr/bin/keychain -q $HOME/.ssh/general/id_rsa
-    /usr/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
-    . $HOME/.keychain/$HOSTNAME-sh
+# if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
+#     /usr/bin/keychain -q $HOME/.ssh/id_rsa
+#     . $HOME/.keychain/$HOSTNAME-sh
+# fi
+
+# for tmux-powerline
+if [[ -n $(command -v tmux) ]]; then
+  [[ -n $TMUX ]] && export TERM="screen-256color"
+  alias tmux="tmux -2"
+  export PLATFORM="linux"
+  PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
 fi
 
+[[ -s $HOME/.bashrc_gentoo_after ]] && . $HOME/.bashrc_gentoo_after
