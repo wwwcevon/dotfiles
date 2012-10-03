@@ -145,7 +145,7 @@ set tags=tags
 
 " set autocomplete
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-set completeopt=longest,menu
+" set completeopt=longest,menu
 
 map <F2> <Esc>:NERDTree<Cr>
 map <F3> <Esc>:TlistToggle<Cr>
@@ -199,6 +199,9 @@ set cursorcolumn cursorline
 hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
 set modeline
+
+set textwidth=80
+autocmd BufNewFile,BufRead *.html,*.mustache set textwidth=0
 
 " per-subtree .vimrc
 function! FindAndSourceLocalVimrc()

@@ -30,30 +30,30 @@ mail_count+=(["background"]="red")
 mail_count+=(["separator"]="${separator_left_bold}")
 register_segment "mail_count"
 
-declare -A now_playing
-if [ "$PLATFORM" == "linux" ]; then
-	now_playing+=(["script"]="${segments_path}/np_mpd.sh")
-	#now_playing+=(["script"]="${segments_path}/np_spotify_linux_wine.sh")
-	#now_playing+=(["script"]="${segments_path}/np_spotify_linux_native.sh")
-	#now_playing+=(["script"]="${segments_path}/np_rhythmbox.sh")
-	#now_playing+=(["script"]="${segments_path}/np_banshee.sh")
-	#now_playing+=(["script"]="${segments_path}/np_audacious.sh")
-elif [ "$PLATFORM" == "mac" ]; then
-	now_playing+=(["script"]="${segments_path}/np_itunes_mac.sh")
-fi
-if [[ ${now_playing["script"]} ]]; then
-	now_playing+=(["foreground"]="colour37")
-	now_playing+=(["background"]="colour234")
-	now_playing+=(["separator"]="${separator_left_bold}")
-	register_segment "now_playing"
-fi
+# declare -A now_playing
+# if [ "$PLATFORM" == "linux" ]; then
+# 	now_playing+=(["script"]="${segments_path}/np_mpd.sh")
+# 	#now_playing+=(["script"]="${segments_path}/np_spotify_linux_wine.sh")
+# 	#now_playing+=(["script"]="${segments_path}/np_spotify_linux_native.sh")
+# 	#now_playing+=(["script"]="${segments_path}/np_rhythmbox.sh")
+# 	#now_playing+=(["script"]="${segments_path}/np_banshee.sh")
+# 	#now_playing+=(["script"]="${segments_path}/np_audacious.sh")
+# elif [ "$PLATFORM" == "mac" ]; then
+# 	now_playing+=(["script"]="${segments_path}/np_itunes_mac.sh")
+# fi
+# if [[ ${now_playing["script"]} ]]; then
+# 	now_playing+=(["foreground"]="colour37")
+# 	now_playing+=(["background"]="colour234")
+# 	now_playing+=(["separator"]="${separator_left_bold}")
+# 	register_segment "now_playing"
+# fi
 
 declare -A cpu
 cpu+=(["script"]="${segments_path}/cpu.sh")
 cpu+=(["foreground"]="colour136")
 cpu+=(["background"]="colour240")
 cpu+=(["separator"]="${separator_left_bold}")
-#register_segment "cpu"
+# register_segment "cpu"
 
 declare -A load
 load+=(["script"]="${segments_path}/load.sh")

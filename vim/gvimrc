@@ -4,8 +4,8 @@ endif
 
 set t_Co=256
 color jellybeans
-set guifontwide="STHeiti":h20
-set guifont=Menlo:h14
+" set guifontwide="STHeiti":h20
+set guifont=Menlo\ Bold\ 9
 " set guifontwide="Hiragino Sans GB":h14
 set guioptions=c
 set columns=128
