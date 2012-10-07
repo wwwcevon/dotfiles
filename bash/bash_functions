@@ -115,7 +115,8 @@ __gitdir ()
 
 parse_git ()
 {
-output=$(__git_ps1 "[%s]")
+# output=$(__git_ps1 "[%s]")
+output=$(__git_ps1 "‹%s›")
 if [ $output ]; then
   echo "$output "
 fi
@@ -168,9 +169,11 @@ __ruby_version ()
 ruby=$(command -v ruby)
 if [[ -n "$ruby" ]]; then
   if [[ $(echo $ruby | grep -o "rvm") == "rvm" ]]; then
-    version="(rvm $(ruby --version | awk '{print $2}'))"
+    # version="(rvm $(ruby --version | awk '{print $2}'))"
+    version="‹rvm $(ruby --version | awk '{print $2}')›"
   else
-    version="(system)"
+    # version="(system)"
+    version="‹system›"
   fi
   echo "$version "
 fi
