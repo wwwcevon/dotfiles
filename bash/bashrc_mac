@@ -21,8 +21,8 @@ export CFLAGS='-arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
 export CXXFLAGS="${CFLAGS}"
 # LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
 # LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
-export LDFLAGS='-arch x86_64 -bind_at_load -L/usr/local/opt/gettext/lib'
-export CPPFLAGS='-I/usr/local/opt/gettext/include'
+# export LDFLAGS='-arch x86_64 -bind_at_load -L/usr/local/opt/gettext/lib'
+# export CPPFLAGS='-I/usr/local/opt/gettext/include'
 
 # bash completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then

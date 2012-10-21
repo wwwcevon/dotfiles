@@ -193,6 +193,7 @@ autocmd BufNewFile,BufRead * setlocal nofoldenable
 
 " ctrlp remove default mapping
 let g:ctrlp_map = '<c-l>'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 " highlight current line and column
 set cursorcolumn cursorline
