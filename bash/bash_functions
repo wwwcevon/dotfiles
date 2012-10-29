@@ -175,7 +175,7 @@ if [[ -n "$ruby" ]]; then
     # version="(system)"
     version="‹system›"
   fi
-  echo "$version "
+  echo "$version"
 fi
 }
 
@@ -188,7 +188,7 @@ if [[ -n "$python" ]]; then
   else
     version="(system)"
   fi
-  echo "$version "
+  echo "$version"
 fi
 }
 
