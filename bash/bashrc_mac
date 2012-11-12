@@ -6,6 +6,12 @@ gentoo_bash="$HOME/Gentoo/bin/bash"
 if [ $SHELL == $gentoo_bash ]; then
     export EPREFIX=$HOME/Gentoo
     export PATH=$EPREFIX/usr/bin:$EPREFIX/usr/sbin:$EPREFIX/bin:$EPREFIX/tmp/usr/bin:$EPREFIX/tmp/bin:/sbin:$PATH
+
+    PS1='\[\e[1;32m\](prefix)\[\e[m\]' # prefix
+    PS1=$PS1'\[\e[1;31m\]\h\[\e[m\] ' # host
+    PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
+    export PS1
+    return
 fi
 
 # path
@@ -14,11 +20,11 @@ PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
 # export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
 
 # CHOST for Mac OS X
-export CHOST="x86_64-apple-darwin11.4.0"
+export CHOST="x86_64-apple-darwin12"
 # CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
-export CFLAGS='-arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
+# export CFLAGS='-arch x86_64 -march=nocona -g -O2 -pipe -no-cpp-precomp'
 # CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
-export CXXFLAGS="${CFLAGS}"
+# export CXXFLAGS="${CFLAGS}"
 # LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
 # LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
 # export LDFLAGS='-arch x86_64 -bind_at_load -L/usr/local/opt/gettext/lib'
@@ -127,4 +133,6 @@ fi
 
 export GOPATH="$HOME/projects/go/mygo"
 export PATH="$PATH:$HOME/projects/go/mygo/bin"
+export JAVA_HOME="$(/usr/libexec/java_home)"
+
 

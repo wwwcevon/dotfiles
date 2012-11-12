@@ -1,0 +1,2 @@
+(if (null window-system) (load-theme 'manoj-dark t))
+(if (window-system) (load-theme 'monokai t))
