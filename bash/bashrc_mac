@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Check for an interactive session
 # [[ $- != *i* ]] && exit
 
@@ -128,7 +129,11 @@ fi
 [ -f $HOME/.bash_functions ] && . $HOME/.bash_functions
 
 if [ $(function_exists __git_ps1) == 'function' ]; then
-   export PS1='\[\033[01;33m\]$(is_root)\[\e[00m\]\[\033[01;31m\]\h\[\033[00m\] \[\033[01;34m\]\W \$\[\033[00m\] \[\033[01;33m\]$(__ruby_version)\[\033[00m\]\[\033[01;32m\]$(parse_git)\[\033[00m\]'
+    PS1='\[\e[1;31m\]\h\[\e[m\] ' # host
+    PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
+    PS1=$PS1'\[\e[1;33m\]$(__ruby_version)\[\e[m\]' # rvm
+    PS1=$PS1'\[\e[1;32m\]$(__git_ps1)\[\e[m\] ' # git
+    export PS1
 fi
 
 export GOPATH="$HOME/projects/go/mygo"
