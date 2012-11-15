@@ -32,7 +32,6 @@ alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias mysql='mysql --default-character-set=utf8 --auto-rehash'
 alias ssh='ssh -A'
-alias emacs='emacs -nw'
 alias em='emacs'
 
 # mutt
@@ -85,4 +84,3 @@ if [[ -n $(command -v tmux) ]]; then
 fi
 
 [[ -s $HOME/.bashrc_gentoo_after ]] && . $HOME/.bashrc_gentoo_after
-
