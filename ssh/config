@@ -1,0 +1,140 @@
+Host *
+    ServerAliveInterval 60
+    GSSAPIAuthentication no
+    ControlMaster auto
+    ControlPath /tmp/ssh-%r@%h:%p
+    Compression yes
+    CompressionLevel 7
+    Cipher blowfish
+
+Host app00-001
+    Hostname 192.168.1.100
+    user chenlei
+Host donkey
+    Hostname 192.168.1.96
+    user chenlei
+Host zmq10
+    HostName 10.10.6.214
+    User chenlei
+Host zmq11
+    HostName 10.11.3.55
+    User chenlei
+Host sysdev
+    HostName 192.168.1.26
+    User chenlei
+Host vector
+    HostName 192.168.1.73
+    User sysdev
+Host alterneith
+    HostName 192.168.1.136
+    User root
+Host pmt001
+    HostName 192.168.201.48
+    User chenlei
+Host pmt003
+    HostName 10.11.3.50
+    User chenlei
+Host 96
+    HostName 192.168.1.96
+    User chenlei
+Host app01-009
+    HostName app01-009.i.ajkdns.com
+    User chenlei
+Host app01-008
+    HostName app01-008.i.ajkdns.com
+    User chenlei
+Host app11-008
+    HostName app11-008.i.ajkdns.com
+    User chenlei
+Host app11-026
+    HostName app11-026.i.ajkdns.com
+    User chenlei
+Host img01-014
+    HostName img01-014.i.ajkdns.com
+    User chenlei
+Host pmt001
+    HostName 192.168.201.48
+    User chenlei
+Host pmt002
+    HostName 192.168.10.157
+    User chenlei
+Host 73
+    HostName 192.168.1.73
+    User root
+Host kankan
+    HostName kankan.corp.anjuke.com
+    User chenlei
+Host app02-014
+    HostName 10.0.1.150
+    User chenlei
+Host img02-010
+    HostName 10.0.1.160
+    User chenlei
+Host img02-011
+    HostName 10.0.1.161
+    User chenlei
+Host img02-012
+    HostName 10.0.1.159
+    User chenlei
+Host idx10-011
+    HostName 10.10.6.40
+    User chenlei
+Host img02-002
+    HostName 10.0.1.131
+    User chenlei
+Host aa.dev.jinpu.com
+    Hostname aa.dev.jinpu.com
+    User chenlei
+Host pmt-test
+    Hostname 192.168.10.157
+    User chenlei
+Host img11-012
+    Hostname img11-012
+    User chenlei
+Host idx10-012
+    Hostname 10.10.6.41
+    User chenlei
+Host idx10-013
+    Hostname 10.10.6.42
+    User chenlei
+Host gitcorp
+    Hostname 192.168.1.61
+    user git
+Host tomleng
+    hostname 192.168.1.45
+    user tomleng
+Host github
+    Hostname github.com
+    user git
+Host bitbucket
+    Hostname bitbucket.org
+    user git
+Host 57
+    Hostname 192.168.201.57
+    user evans
+Host jehuty
+    Hostname 192.168.1.70
+    user aleiphoenix
+Host dbbak10-001
+    Hostname 10.10.8.35
+    user hadoop
+Host chicken
+    Hostname 10.10.6.226
+    user leichen_sh
+Host im10-001
+    Hostname im10-001
+    user evans
+    port 2222
+Host flandre
+    Hostname 192.168.1.73
+    user root
+    port 2222
+host hina
+    hostname 127.0.0.1
+    user root
+    port 2222
+
+host dumb
+  hostname localhost
+  port 2222
+  user root

@@ -1,0 +1,104 @@
+#!/bin/bash
+user-manual /usr/share/doc/privoxy/user-manual
+confdir /etc/privoxy
+logdir /var/log/privoxy
+logfile logfile
+listen-address 0.0.0.0:8118
+debug 1
+debug 2
+debug 4
+debug 512
+debug 1024
+toggle 0
+enable-remote-toggle  0
+enable-remote-http-toggle  0
+enable-edit-actions 0
+enforce-blocks 0
+buffer-limit 65536 # 64MB
+forwarded-connect-retries 3
+accept-intercepted-requests 1
+allow-cgi-request-crunching 0
+keep-alive-timeout 300
+socket-timeout 300
+handle-as-empty-doc-returns-ok 1
+
+forward / .
+# forward .ajkimg.com app02-014.i.ajkdns.com:20080
+forward .ajkimg.com app02-003:20080
+# forward .anjukestatic.com cdn02-001:80
+# forward .anjukestatic.com cdn02-004:20080
+# forward .anjukestatic.com lb11-001:80
+# forward .anjukestatic.com img11-t01:80
+# forward .anjukestatic.com app02-003:20080
+
+# forward  inc.bbs.ajkcdn.com app10-026:80
+
+# forward .mac.dev.areverie.org           192.168.1.70:80
+# forward .dev.areverie.org               192.168.2.223:80
+forward 192.168.2.100                   192.168.2.223:8118
+forward .areverie.org                   192.168.2.223:8118
+
+# bypass gfw
+forward .phobos.apple.com               203.69.113.136:80
+forward .google.com                     192.168.2.223:8118
+forward .google.co.jp                   192.168.2.223:8118
+forward .twitter.com                    192.168.2.223:8118
+forward .twimg.com                      192.168.2.223:8118
+forward .blogspot.com                   192.168.2.223:8118
+forward .blogger.com                    192.168.2.223:8118
+forward .facebook.com                   192.168.2.223:8118
+forward .fbcdn.net                      192.168.2.223:8118
+forward .googleusercontent.com          192.168.2.223:8118
+forward .youtube.com                    192.168.2.223:8118
+forward .ytimg.com                      192.168.2.223:8118
+forward .t.co                           192.168.2.223:8118
+forward .weibo.com                      192.168.2.223:8118
+forward .img.ly                         192.168.2.223:8118
+forward .wordpress.com                  192.168.2.223:8118
+forward .hinablue.me                    192.168.2.223:8118
+forward .speakerdeck.com                192.168.2.223:8118
+forward .sourceforge.net                192.168.2.223:8118
+forward .j.mp                           192.168.2.223:8118
+forward .sapikachu.net                  192.168.2.223:8118
+forward .twitpic.com                    192.168.2.223:8118
+# forward .taobao.com                     192.168.2.223:8118
+forward .zeromq.org                     192.168.2.223:8118
+forward .wildfiles.com                  192.168.2.223:8118
+forward .feedburner.com                 192.168.2.223:8118
+forward .smf.is                         192.168.2.223:8118
+forward .boxun.com                      192.168.2.223:8118
+forward .mediafire.com                  192.168.2.223:8118
+forward .aboluowang.com                 192.168.2.223:8118
+forward .python.org                     192.168.2.223:8118
+forward .diigo.com                      192.168.2.223:8118
+forward 192.168.2.10                    192.168.2.223:8118
+forward .blogimg.jp                     192.168.2.223:8118
+forward .unixbsd.info                   192.168.2.223:8118
+forward .fc2.com                        192.168.2.223:8118
+forward .mibbit.com                     192.168.2.223:8118
+forward .dropbox.com                    192.168.2.223:8118
+forward .imdb.com                       192.168.2.223:8118
+forward .rfa.org                        192.168.2.223:8118
+forward .cl.ly                          192.168.2.223:8118
+forward .bilibili.tv                    192.168.2.223:8118
+forward .ow.ly                          192.168.2.223:8118
+forward .vimeo.com                      192.168.2.223:8118
+forward .getfoxyproxy.org               192.168.2.223:8118
+forward .viddler.com                    192.168.2.223:8118
+forward .ime.nu                         192.168.2.223:8118
+forward .youtu.be                       192.168.2.223:8118
+forward .riku.me                        192.168.2.223:8118
+forward .twerpscan.com                  192.168.2.223:8118
+forward .appspot.com                    192.168.2.223:8118
+forward .faqs.org                       192.168.2.223:8118
+forward .hrichina.org                   192.168.2.223:8118
+forward .naquadah.org                   192.168.2.223:8118
+forward .github.com                     192.168.2.223:8118
+forward .t.163.com                      192.168.2.223:8118
+forward .yfrog.com                      192.168.2.223:8118
+forward .rubygems.org                   192.168.1.59:8123
+forward .amcharts.com                   192.168.2.223:8118
+forward .websitepulse.com               192.168.2.223:8118
+forward .yegle.net                      192.168.2.223:8118
+forward .togetter.com                   192.168.2.223:8118
+
