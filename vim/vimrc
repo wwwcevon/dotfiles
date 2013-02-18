@@ -103,6 +103,7 @@ endif
 
 " set columns=124
 " set lines=40
+set viminfo='20,\"1000
 set number
 set nobackup
 set smartindent
@@ -201,7 +202,7 @@ hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
 set modeline
 
-set textwidth=80
+setlocal textwidth=78
 autocmd BufNewFile,BufRead *.html,*.mustache,*.sh set textwidth=0
 
 " per-subtree .vimrc
