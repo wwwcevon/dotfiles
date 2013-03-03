@@ -72,8 +72,8 @@ alias ls="ls"
 alias l='ls'
 alias ssh='ssh -A'
 alias tmux='/usr/bin/env tmux -2'
-alias emacs='emacs -nw'
-alias em='emacs'
+alias memacs='~/Applications/Emacs.app/Contents/MacOS/Emacs'
+alias mem='memacs -nw'
 
 [[ "command -v mvim" ]] && alias vim="mvim" && alias vi="mvim -v"
 
@@ -96,16 +96,6 @@ export LANG="en_US.UTF-8"
 
 # normal PS1
 export PS1="\u@\h \W \$ "
-
-if [ -f $HOME/.ssh/id_rsa ]; then
-    /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/basechem/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/github/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/gitcafe/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/old/id_rsa
-    /usr/local/bin/keychain -q $HOME/.ssh/anjuke/id_rsa
-    . $HOME/.keychain/$HOSTNAME-sh
-fi
 
 # Load alternative php
 [[ -d /usr/local/php-5.4.0 ]] && export PATH="/usr/local/php-5.4.0/bin:$PATH"
@@ -140,6 +130,6 @@ fi
 
 export GOPATH="$HOME/projects/go/mygo"
 export PATH="$PATH:$HOME/projects/go/mygo/bin"
-export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME="$(/usr/libexec/java_home --version 1.7.0_u9)"
 
-
+[[ -s $HOME/.bashrc_mac_after ]] && . $HOME/.bashrc_mac_after

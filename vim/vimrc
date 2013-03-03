@@ -202,8 +202,8 @@ hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
 set modeline
 
-" setlocal textwidth=78
-autocmd FileType ruby,python set textwidth=78
+set textwidth=0
+autocmd FileType ruby,python setlocal textwidth=78
 
 " per-subtree .vimrc
 function! FindAndSourceLocalVimrc()
@@ -228,4 +228,3 @@ call FindAndSourceLocalVimrc()
 if filereadable($HOME . "/.vimrc_after")
   source $HOME/.vimrc_after
 endif
-

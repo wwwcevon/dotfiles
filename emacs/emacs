@@ -1,10 +1,23 @@
 ; -*- mode: lisp; -*-
+(load "~/.emacs.before" 'noerror)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'load-path "~/.emacs.d/modes/")
-(add-to-list 'load-path "~/.emacs.before")
 
 (if (null window-system) (load-theme 'cyberpunk t))
 (if (window-system) (load-theme 'monokai t))
+; load markdown-mode
+(autoload 'markdown-mode' "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+
+; load yaml-mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-hook 'yaml-mode-hook
+  '(lambda ()
+    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+
 ; (global-linum-mode)
 (global-font-lock-mode 1)
 ; disable backup
@@ -34,10 +47,6 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(c-basic-offset 2)
  '(js-indent-level 2))
@@ -53,3 +62,4 @@
 (global-set-key "\C-l" 'goto-line)
 (server-start)
 (add-to-list 'load-path "~/.emacs.after")
+(load "~/.emacs.after" 'noerror)

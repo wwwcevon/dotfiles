@@ -169,8 +169,14 @@ __ruby_version ()
 ruby=$(command -v ruby)
 if [[ -n "$ruby" ]]; then
   if [[ $(echo $ruby | grep -o "rvm") == "rvm" ]]; then
-    # version="(rvm $(ruby --version | awk '{print $2}'))"
-    version="‹rvm $(ruby --version | awk '{print $2}')›"
+    version="$(ruby --version)"
+    ver=$(echo $version | awk '{print $2}')
+    impl=$(echo $version | awk '{print $1}')
+    if [[ $impl != "ruby" ]]; then
+      version="‹rvm ${impl} ${ver}›"
+    else
+      version="‹rvm ${ver}›"
+    fi
   else
     # version="(system)"
     version="‹system›"
