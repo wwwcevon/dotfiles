@@ -202,8 +202,8 @@ hi cursorline gui=UNDERLINE cterm=UNDERLINE
 
 set modeline
 
-setlocal textwidth=78
-autocmd BufNewFile,BufRead *.html,*.mustache,*.sh set textwidth=0
+" setlocal textwidth=78
+autocmd FileType ruby,python set textwidth=78
 
 " per-subtree .vimrc
 function! FindAndSourceLocalVimrc()
