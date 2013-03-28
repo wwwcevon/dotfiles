@@ -14,13 +14,28 @@
 (setq inhibit-startup-message t)
 (setq enable-local-variables :all)
 
+;; disable menu bar
+(menu-bar-mode -99)
+
+;; diable tool bar
+(tool-bar-mode -1)
+
+;; scss mode
+;; (setq exec-path (cons (expand-file-name "~/.rvm/bin") exec-path))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/modes/scss-mode.el"))
+;; (autoload 'scss-mode "scss-mode")
+;; (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile\\.lock\\'" . ruby-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
- '(c-basic-offset 4))
+ '(c-basic-offset 2)
+ '(js-indent-level 2))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -28,3 +43,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:weight bold :height 90 :width normal :foundry "bitstream" :family "Menlo")))))
+
+(global-set-key "\C-l" 'goto-line)
+
+(server-start)
