@@ -74,8 +74,10 @@ alias ssh='ssh -A'
 alias tmux='/usr/bin/env tmux -2'
 alias memacs='~/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias mem='memacs -nw'
+alias vi='mem'
+alias vim='memacs'
 
-[[ "command -v mvim" ]] && alias vim="mvim" && alias vi="mvim -v"
+[[ -n "$(command -v mvim)" ]] && alias vim="mvim" && alias vi="mvim -v"
 
 if [ "$PS1" ]; then
     complete -cf sudo
@@ -83,7 +85,8 @@ fi
 
 export NODE_PATH="/usr/local/lib/node_modules"
 
-export EDITOR="mvim"
+# export EDITOR="mvim"
+export EDITOR="emacs"
 
 export HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
