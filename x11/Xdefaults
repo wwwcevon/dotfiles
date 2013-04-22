@@ -1,0 +1,93 @@
+! transparent
+URxvt*transparent: true
+URxvt*.shading: 20
+
+! -*- { Xft settings
+Xft*dpi:        96
+Xft*antialias:  true
+Xft*hinting:    true
+! -*- }
+
+URxvt.scrollstyle:      rxvt
+URxvt.scrollBar:        false
+URxvt*scrollTtyOutput:  false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt*font:             xft:Menlo:bold:size=10
+
+
+! -*- { theming tango
+
+*background: #0f0f0f
+*foreground: #c8c8c8
+
+! black
+*color0:    #2E3436
+*color8:    #555753
+
+! red
+*color1:    #a40000
+*color9:    #EF2929
+
+! green
+*color2:    #4ea906
+*color10:   #8ae234
+
+! yellow
+*color3:    #c4a000
+*color11:   #fce94f
+
+! blue
+*color4:    #3465a4
+*color11:   #729fcf
+
+! purple
+*color5:    #75507b
+*color13:   #ad7fa8
+
+! orange
+*color6:    #ce5c00
+*color14:   #fcaf3e
+
+! white
+*color7:    #babdb9
+*color15:   #eeeeec
+
+! -*- }
+!TomorrowNightEighties
+
+*.foreground:   #cccccc
+*.background:   #2d2d2d
+*.cursorColor:  #aeafad
+
+! Black / Grey
+*.color0:       #000000
+*.color8:       #666666
+
+! Red / Bright Red
+*.color1:       #f2777a
+*.color9:       #FF3334
+
+! Green + Bright Green
+*.color2:       #99cc99
+*.color10:      #9ec400
+
+! Yellow (Orange) + Bright Yellow (Yellow)
+*.color3:       #f99157
+*.color11:      #ffcc66
+
+! Blue + Bright Blue
+*.color4:       #6699cc
+*.color12:      #6699cc
+
+! Magenta (Purple) + Bright Magenta
+*.color5:       #cc99cc
+*.color13:      #b777e0
+
+! Cyan (Aqua) + Bright Cyan
+*.color6:       #66cccc
+*.color14:      #54ced6
+
+! Light Grey (Selection) + White (Current Line)
+*.color7:       #515151
+*.color15:      #393939
