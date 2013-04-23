@@ -14,11 +14,6 @@ if [ "$PS1" ]; then
     complete -cf sudo
 fi
 
-# export default input method
-export GTK_IM_MODULE=scim
-export XMODIFIERS=@im=SCIM
-export QT_IM_MODULE=scim
-
 # export PATH var
 export PATH=$PATH:~/bin
 
