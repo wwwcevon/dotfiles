@@ -1,6 +1,6 @@
 ! transparent
 URxvt*transparent: true
-URxvt*.shading: 20
+URxvt*.shading: 25
 
 ! -*- { Xft settings
 Xft*dpi:        96
@@ -13,7 +13,7 @@ URxvt.scrollBar:        false
 URxvt*scrollTtyOutput:  false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
-URxvt*font:             xft:Menlo:bold:size=10
+URxvt*font:             xft:Menlo:bold:size=9
 
 
 ! -*- { theming tango
@@ -54,40 +54,31 @@ URxvt*font:             xft:Menlo:bold:size=10
 *color15:   #eeeeec
 
 ! -*- }
-!TomorrowNightEighties
 
-*.foreground:   #cccccc
-*.background:   #2d2d2d
-*.cursorColor:  #aeafad
+! -*- { theme snowcherry
 
-! Black / Grey
-*.color0:       #000000
-*.color8:       #666666
-
-! Red / Bright Red
-*.color1:       #f2777a
-*.color9:       #FF3334
-
-! Green + Bright Green
-*.color2:       #99cc99
-*.color10:      #9ec400
-
-! Yellow (Orange) + Bright Yellow (Yellow)
-*.color3:       #f99157
-*.color11:      #ffcc66
-
-! Blue + Bright Blue
-*.color4:       #6699cc
-*.color12:      #6699cc
-
-! Magenta (Purple) + Bright Magenta
-*.color5:       #cc99cc
-*.color13:      #b777e0
-
-! Cyan (Aqua) + Bright Cyan
-*.color6:       #66cccc
-*.color14:      #54ced6
-
-! Light Grey (Selection) + White (Current Line)
-*.color7:       #515151
-*.color15:      #393939
+! black
+*color0:    #000000
+*color8:    #454545
+! red
+*color1:    #FF3333
+*color9:    #F53D3D
+! green
+*color2:    #83ED12
+*color10:   #9BE64A
+! yellow
+*color3:    #FF8D00
+*color11:   #F49725
+! blue
+*color4:    #258CF4
+*color12:   #66B2FF
+! purple
+*color5:    #8C1AFF
+*color13:   #B26EF7
+! aqua
+*color6:    #33FFFF
+*color14:   #8CF2F2
+! white
+*color7:    #D9D9D9
+*color15:   #FFFFFF
+! -*- }
