@@ -8,12 +8,15 @@ Xft*antialias:  true
 Xft*hinting:    true
 ! -*- }
 
-URxvt.scrollstyle:      rxvt
-URxvt.scrollBar:        false
-URxvt*scrollTtyOutput:  false
-URxvt*scrollWithBuffer: true
+URxvt.scrollstyle:       rxvt
+URxvt.scrollBar:         false
+URxvt*scrollTtyOutput:   false
+URxvt*scrollWithBuffer:  true
 URxvt*scrollTtyKeypress: true
-URxvt*font:             xft:Menlo:bold:size=9
+URxvt*font:              xft:Menlo:bold:size=9, \
+                         xft:TakaoExGothic:bold:size=9, \
+                         xft:WenQuanYi Micro Hei:bold:size=9 \
+URxvt*termName:          xterm-256color
 
 
 ! -*- { theming tango
@@ -55,7 +58,7 @@ URxvt*font:             xft:Menlo:bold:size=9
 
 ! -*- }
 
-! -*- { theme snowcherry
+! -*- { theme snowcherry / yukisakura
 
 ! black
 *color0:    #000000
