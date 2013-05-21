@@ -29,8 +29,6 @@ alias mysql='mysql --default-character-set=utf8 --auto-rehash'
 alias ssh='ssh -A'
 alias e='emacsclient -t'
 alias ec='emacsclient -c'
-alias vi='emacsclient -t'
-alias vim='emacsclient -t'
 
 # mutt
 MAIL=/var/spool/mail/aleiphoenix && export MAIL
