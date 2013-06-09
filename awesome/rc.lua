@@ -11,10 +11,11 @@ require("naughty")
 -- Themes define colours, icons, and wallpapers
 --beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 beautiful.init("/home/aleiphoenix/.config/awesome/theme.lua")
---awful.util.spawn_with_shell("compton -cFG -o 0.3 -D 5 &");
+awful.util.spawn_with_shell("fcitx");
+awful.util.spawn_with_shell("compton -cC -O 0.1 -I 0.1 -D 5 -f -z");
 
 -- This is used later as the default terminal and editor to run.
-terminal = "terminal"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -66,7 +67,7 @@ end
 -- {{{ music widget
 require("awesompd/awesompd")
 musicwidget = awesompd:create() -- Create awesompd widget
-musicwidget.font = "Liberation Mono" -- Set widget font
+musicwidget.font = "IPAPGothic 9" -- Set widget font
 musicwidget.scrolling = true -- If true, the text in the widget will be scrolled
 musicwidget.output_size = 30 -- Set the size of widget in symbols
 musicwidget.update_interval = 5 -- Set the update interval in seconds
