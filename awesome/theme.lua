@@ -17,11 +17,10 @@ theme.fg_focus      = "#81e1dd"
 theme.fg_urgent     = theme.fg_focus
 theme.fg_minimize   = theme.fm_focus
 
-theme.border_width  = 1
+theme.border_width  = 2
 theme.border_normal = "#000000"
-theme.border_focus  = "#9069d0"
+theme.border_focus  = "#0f8a86"
 theme.border_marked = theme.border_focus
-
 
 theme.bar_height  = 20
 theme.menu_height = 22
@@ -75,4 +74,3 @@ theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 
 return theme
-
