@@ -1,6 +1,8 @@
-! transparent
-URxvt*transparent: true
-URxvt*.shading: 25
+! pseudo-transparent
+! URxvt*transparent: true
+! URxvt*.shading: 25
+
+URxvt.depth: 32
 
 ! -*- { Xft settings
 Xft*dpi:        96
@@ -13,15 +15,16 @@ URxvt.scrollBar:         false
 URxvt*scrollTtyOutput:   false
 URxvt*scrollWithBuffer:  true
 URxvt*scrollTtyKeypress: true
-URxvt*font:              xft:Menlo:bold:size=9, \
-                         xft:TakaoExGothic:bold:size=9, \
-                         xft:WenQuanYi Micro Hei:bold:size=9
-URxvt*termName:          xterm-256color
+URxvt*font:              xft:Menlo:bold:size=14, \
+                         xft:TakaoExGothic:bold:size=14, \
+                         xft:WenQuanYi Micro Hei:bold:size=14
 
+URxvt*termName:          xterm-256color
+URxvt*loginShell:        true
 
 ! -*- { theming tango
 
-*background: #0f0f0f
+*background: [75]black
 *foreground: #c8c8c8
 
 ! black
