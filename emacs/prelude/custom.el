@@ -1,9 +1,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-(if (null window-system)
-    (load-theme 'cyberpunk t)
-  (load-theme 'monokai t))
-
+(load-theme 'monokai t)
 
 ;; Comment and Uncomment
 (defun comment-or-uncomment-line-or-region ()
@@ -45,12 +42,8 @@
   (set-default-font "Menlo-10")
   (set-fontset-font "fontset-default"
                     'gb18030 "WenQuanYi Micro Hei-10"))
-(defun unbind-mark()
-      (global-unset-key (kbd "C-SPC"))
-       (global-set-key (kbd "M-SPC") 'set-mark-command))
 
 (add-hook 'before-mode-php 'php-enable-pear-coding-style)
 (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
-(add-hook 'before-make-frame-hook #'(lambda () (unbind-mark)))
 
 (set-chinese-font)
