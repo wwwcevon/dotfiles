@@ -75,8 +75,6 @@ fi
 if [[ -n $(command -v tmux) ]]; then
   [[ -n $TMUX ]] && export TERM="screen-256color"
   alias tmux="tmux -2"
-  export PLATFORM="linux"
-  export PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
 fi
 
 [[ -s $HOME/.bashrc_gentoo_after ]] && . $HOME/.bashrc_gentoo_after
