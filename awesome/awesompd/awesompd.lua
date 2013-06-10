@@ -228,8 +228,8 @@ function awesompd:run()
    enable_dbg = self.debug_mode
    self.load_icons(self.path_to_icons)
    jamendo.set_current_format(self.jamendo_format)
-   if self.album_cover_size > 100 then
-      self.album_cover_size = 100
+   if self.album_cover_size > 300 then
+      self.album_cover_size = 300
    end
 
    self:update_track()
