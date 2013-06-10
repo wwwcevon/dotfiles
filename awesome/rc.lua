@@ -7,26 +7,21 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
--- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
---beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+require("dropdown")
+
 beautiful.init("/home/aleiphoenix/.config/awesome/theme.lua")
 awful.util.spawn_with_shell("fcitx");
-awful.util.spawn_with_shell("compton -cC -O 0.1 -I 0.1 -D 5 -f -z");
+awful.util.spawn_with_shell("compton -cC -O 0.1 -I 0.1 -D 3 -f -z");
 
--- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
+fg_color_active = "#81e1dd"
+fg_color_normal = "#9069d0"
+
 modkey = "Mod4"
 
--- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
   awful.layout.suit.floating,
@@ -34,18 +29,17 @@ layouts =
   awful.layout.suit.tile.left,
   awful.layout.suit.tile.bottom,
   awful.layout.suit.tile.top,
-  --awful.layout.suit.fair,
-  --awful.layout.suit.fair.horizontal,
-  --awful.layout.suit.spiral,
-  --awful.layout.suit.spiral.dwindle,
-  --awful.layout.suit.max,
-  --awful.layout.suit.max.fullscreen,
-  --awful.layout.suit.magnifier
+  -- awful.layout.suit.fair,
+  -- awful.layout.suit.fair.horizontal,
+  -- awful.layout.suit.spiral,
+  -- awful.layout.suit.spiral.dwindle,
+  -- awful.layout.suit.max,
+  -- awful.layout.suit.max.fullscreen,
+  -- awful.layout.suit.magnifier
 }
 -- }}}
 
 -- {{{ Tags
--- Define a tag table which hold all screen tags.
 tags = {
   names = {"term", "web", "im", "rdp", "misc", "office"},
   layout = {layouts[2], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1]}
@@ -55,51 +49,29 @@ for s = 1, screen.count() do
   -- Each screen has its own tag table.
   tags[s] = awful.tag(tags.names, s, tags.layout)
 end
-
---for s = 1, screen.count() do
---    -- Each screen has its own tag table.
---    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
---end
-
 -- }}}
 
 
 -- {{{ music widget
 require("awesompd/awesompd")
-musicwidget = awesompd:create() -- Create awesompd widget
-musicwidget.font = "IPAPGothic 9" -- Set widget font
-musicwidget.scrolling = true -- If true, the text in the widget will be scrolled
-musicwidget.output_size = 30 -- Set the size of widget in symbols
-musicwidget.update_interval = 5 -- Set the update interval in seconds
--- Set the folder where icons are located (change username to your login name)
+musicwidget = awesompd:create()
+musicwidget.font = "IPAPGothic 9" 
+musicwidget.scrolling = true
+musicwidget.output_size = 30
+musicwidget.update_interval = 5
 musicwidget.path_to_icons = "/home/aleiphoenix/.config/awesome/awesompd/icons"
--- Set the default music format for Jamendo streams. You can change
--- this option on the fly in awesompd itself.
--- possible formats: awesompd.FORMAT_MP3, awesompd.FORMAT_OGG
 musicwidget.jamendo_format = awesompd.FORMAT_MP3
--- If true, song notifications for Jamendo tracks and local tracks will also contain
--- album cover image.
 musicwidget.show_album_cover = true
--- Specify how big in pixels should an album cover be. Maximum value
--- is 100.
-musicwidget.album_cover_size = 50
--- This option is necessary if you want the album covers to be shown
--- for your local tracks.
+musicwidget.album_cover_size = 250
 musicwidget.mpd_config = "/etc/mpd.conf"
--- Specify the browser you use so awesompd can open links from
--- Jamendo in it.
-musicwidget.browser = "chromium --proxy-pac-url='http://chenlei.dev.anjuke.com/proxy.pac'"
--- Specify decorators on the left and the right side of the
--- widget. Or just leave empty strings if you decorate the widget
--- from outside.
+musicwidget.browser = "chromium-browser"
 musicwidget.ldecorator = " "
 musicwidget.rdecorator = " "
--- Set all the servers to work with (here can be any servers you use)
 musicwidget.servers = {
   { server = "127.0.0.1",
   port = 6600 },
 }
--- Set the buttons of the widget
+
 musicwidget:register_buttons({ { "", awesompd.MOUSE_LEFT, musicwidget:command_toggle() },
 { "Control", awesompd.MOUSE_SCROLL_UP, musicwidget:command_prev_track() },
 { "Control", awesompd.MOUSE_SCROLL_DOWN, musicwidget:command_next_track() },
@@ -109,7 +81,30 @@ musicwidget:register_buttons({ { "", awesompd.MOUSE_LEFT, musicwidget:command_to
 { "", "XF86AudioLowerVolume", musicwidget:command_volume_down() },
 { "", "XF86AudioRaiseVolume", musicwidget:command_volume_up() },
 { modkey, "Pause", musicwidget:command_playpause() } })
-musicwidget:run() -- After all configuration is done, run the widget
+musicwidget:run()
+-- }}}
+
+-- {{{ cpu usage
+require("cpu")
+cpuinfowidget = widget({ type = "textbox", name = "cpuinfowidget", align = "right" })
+cpuinfowidget.text = cpu.activecpu(fg_color_active, fg_color_active)
+cputimer = timer({ timeout = 2 })
+cputimer:add_signal("timeout", function () cpuinfowidget.text = cpu.activecpu(fg_color_active, fg_color_active) end)
+cputimer:start()
+-- }}}
+
+-- {{{ memory usage
+require("memory")
+memorywidget = widget({ type = "textbox", name = "memorywidget", aligh="right" })
+memorywidget.text = memory.memory_usage(fg_color_active, fg_color_active)
+memorytimer = timer({ timeout = 2 })
+memorytimer:add_signal("timeout", function () memorywidget.text = memory.memory_usage(fg_color_active, fg_color_active) end)
+memorytimer:start()
+-- }}}
+
+-- {{{ seperator
+myseperator = widget({ type ="textbox", align = "right" })
+myseperator.text = " :: "
 -- }}}
 
 -- {{{ Menu
@@ -120,13 +115,13 @@ myawesomemenu = {
   { "restart", awesome.restart },
   { "quit", awesome.quit }
 }
---- }}}
+-- }}}
 
 mymainmenu = awful.menu({ items = {
   { "awesome", myawesomemenu, beautiful.awesome_icon },
   { "file management", "pcmanfm"},
   { "firefox", "firefox"},
-  { "chromium", "chromium-browser --proxy-pac-url='http://chenlei.dev.anjuke.com/proxy.pac'"},
+  { "chromium", "chromium-browser"},
   { "pidgin", "pidgin" },
   { "lock", "xtrlock" },
   { "screeshot", "screenshot scr" },
@@ -214,8 +209,14 @@ for s = 1, screen.count() do
       layout = awful.widget.layout.horizontal.leftright,
     },
     mylayoutbox[s],
+    myseperator,
     musicwidget.widget,
+    myseperator,
+    memorywidget,
+    cpuinfowidget,
+    myseperator,
     mytextclock,
+    myseperator,
     s == 1 and mysystray or nil,
     mytasklist[s],
     layout = awful.widget.layout.horizontal.rightleft,
@@ -266,6 +267,7 @@ end),
 
 -- Standard program
 awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+awful.key({ modkey,           }, "y",      function () dropdown_toggle(terminal, 350) end),
 awful.key({ modkey, "Control" }, "r", awesome.restart),
 awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
