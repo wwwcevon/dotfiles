@@ -24,7 +24,7 @@ URxvt*loginShell:        true
 
 ! -*- { theming tango
 
-URxvt.background: [75]black
+URxvt.background: [65]black
 URxvt.foreground: #c8c8c8
 
 ! black
