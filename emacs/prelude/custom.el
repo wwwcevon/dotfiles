@@ -43,7 +43,17 @@
   (set-fontset-font "fontset-default"
                     'gb18030 "WenQuanYi Micro Hei-10"))
 
-(add-hook 'before-mode-php 'php-enable-pear-coding-style)
+(defun my-php-settings ()
+  (setq tab-width 4)
+  (setq indent-tabs-mode nil))
+
+(defun my-js-settings ()
+  (setq js-indent-level 2)
+)
+
+(add-hook 'php-mode-hook 'my-php-settings)
+(add-hook 'js-mode-hook 'my-js-settings)
 (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
+
 
 (set-chinese-font)
