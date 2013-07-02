@@ -59,7 +59,7 @@ if [ $(function_exists __git_ps1) == 'function' ]; then
   PS1='\[\e[1;32m\]θ\[\e[m\] ' # host
   PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
   PS1=$PS1'\[\e[1;33m\]$(__ruby_version)\[\e[m\]' # rvm version
-  PS1=$PS1'\[\e[1;32m\]$(__git_ps1)\[\e[m\] ' # git
+  PS1=$PS1'\[\e[1;32m\]$(__parse_git)\[\e[m\]' # git
   export PS1
 fi
 

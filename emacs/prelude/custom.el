@@ -48,12 +48,15 @@
   (setq indent-tabs-mode nil))
 
 (defun my-js-settings ()
-  (setq js-indent-level 2)
-)
+  (setq js-indent-level 2))
+
+(defun my-sh-settings ()
+  (setq sh-basic-offset 2)
+  (setq sh-indentation 2))
 
 (add-hook 'php-mode-hook 'my-php-settings)
 (add-hook 'js-mode-hook 'my-js-settings)
 (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
-
+(add-hook 'sh-mode-hook 'my-sh-settings)
 
 (set-chinese-font)
