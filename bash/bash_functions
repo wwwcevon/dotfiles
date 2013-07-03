@@ -188,7 +188,7 @@ __ruby_version ()
 __parse_git () {
   output=$(__git_ps1)
   if [[ -n "$output" ]]; then
-    output=$(echo $output | sed -r "s;^\s*;;g;s;\s*$;;g")" "
+    output=$(echo $output | sed "s;^\s*;;g;s;\s*$;;g")" "
   else
     output=""
   fi
