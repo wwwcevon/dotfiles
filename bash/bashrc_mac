@@ -78,7 +78,7 @@ alias ec="emacsclient -c"
 alias vim="emacsclient -t"
 alias vi="emacsclient -t"
 alias E="~/Applications/Emacs.app/Contents/MacOS/Emacs"
-
+alias z="zile"
 
 [[ -n "$(command -v mvim)" ]] && alias vim="mvim" && alias vi="mvim -v"
 
