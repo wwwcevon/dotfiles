@@ -59,4 +59,6 @@
 (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
 (add-hook 'sh-mode-hook 'my-sh-settings)
 
+(custom-set-variables '(coffee-tab-width 2))
+
 (set-chinese-font)

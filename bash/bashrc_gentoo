@@ -51,6 +51,9 @@ export NODE_PATH="/usr/local/lib/node_modules"
 # pythonbrew
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 
+# perlbrew
+[[ -s $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
+
 # load functions
 . $HOME/.bash_functions
 

@@ -11,9 +11,11 @@ require("dropdown")
 
 beautiful.init("/home/aleiphoenix/.config/awesome/theme.lua")
 awful.util.spawn_with_shell("fcitx");
+awful.util.spawn_with_shell("urxvtd");
+awful.util.spawn_with_shell("dropbox");
 awful.util.spawn_with_shell("compton -cC -O 0.1 -I 0.1 -D 3 -f -z");
 
-terminal = "urxvt"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -55,7 +57,7 @@ end
 -- {{{ music widget
 require("awesompd/awesompd")
 musicwidget = awesompd:create()
-musicwidget.font = "IPAPGothic 9" 
+musicwidget.font = "IPAPGothic 9"
 musicwidget.scrolling = true
 musicwidget.output_size = 30
 musicwidget.update_interval = 5
@@ -421,4 +423,3 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
