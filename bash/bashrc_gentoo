@@ -43,7 +43,7 @@ export HISTSIZE=1000000
 export PS1="\u@\h \W \$ "
 
 # nodejs
-export NODE_PATH="/usr/local/lib/node_modules"
+export NODE_PATH="/usr/lib/node_modules"
 
 # rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && unset RUBYOPT

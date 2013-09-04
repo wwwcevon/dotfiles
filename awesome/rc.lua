@@ -11,11 +11,11 @@ require("dropdown")
 
 beautiful.init("/home/aleiphoenix/.config/awesome/theme.lua")
 awful.util.spawn_with_shell("fcitx");
-awful.util.spawn_with_shell("urxvtd");
+-- awful.util.spawn_with_shell("urxvtd");
 awful.util.spawn_with_shell("dropbox");
 awful.util.spawn_with_shell("compton -cC -O 0.1 -I 0.1 -D 3 -f -z");
 
-terminal = "urxvtc"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
