@@ -2,6 +2,10 @@
 --- aleiphoenix's awesome config ---
 ------------------------------------
 
+require("os")
+
+home = os.getenv("HOME")
+
 theme = {}
 
 theme.font          = "Visitor TT2 BRK 10"
@@ -56,7 +60,7 @@ theme.titlebar_maximized_button_focus_inactive  = "/usr/share/awesome/themes/def
 theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper_cmd = { "awsetbg -u feh -a '/home/aleiphoenix/.awesomebg'" }
+theme.wallpaper_cmd = { "awsetbg -u feh -a '" .. home .. "/.awesomebg'" }
 
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"
 theme.layout_fairv = "/usr/share/awesome/themes/default/layouts/fairvw.png"

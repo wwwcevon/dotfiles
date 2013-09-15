@@ -8,8 +8,11 @@ require("beautiful")
 require("naughty")
 
 require("dropdown")
+require("os")
 
-beautiful.init("/home/aleiphoenix/.config/awesome/theme.lua")
+home = os.getenv("HOME")
+
+beautiful.init(home .. "/.config/awesome/theme.lua")
 awful.util.spawn_with_shell("fcitx");
 -- awful.util.spawn_with_shell("urxvtd");
 awful.util.spawn_with_shell("dropbox");
@@ -61,7 +64,7 @@ musicwidget.font = "IPAPGothic 9"
 musicwidget.scrolling = true
 musicwidget.output_size = 30
 musicwidget.update_interval = 5
-musicwidget.path_to_icons = "/home/aleiphoenix/.config/awesome/awesompd/icons"
+musicwidget.path_to_icons = home .. "/.config/awesome/awesompd/icons"
 musicwidget.jamendo_format = awesompd.FORMAT_MP3
 musicwidget.show_album_cover = true
 musicwidget.album_cover_size = 250
@@ -121,7 +124,7 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = {
   { "awesome", myawesomemenu, beautiful.awesome_icon },
-  { "file management", "pcmanfm"},
+  { "file management", "qtfm"},
   { "firefox", "firefox"},
   { "chromium", "chromium-browser"},
   { "pidgin", "pidgin" },
