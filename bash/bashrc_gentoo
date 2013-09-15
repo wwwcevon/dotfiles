@@ -89,6 +89,8 @@ export PS1
 #     . $HOME/.keychain/$HOSTNAME-sh
 # fi
 
+unset RUBYOPT
+
 # for tmux-powerline
 if [[ -n $(command -v tmux) ]]; then
   [[ -n $TMUX ]] && export TERM="screen-256color"
