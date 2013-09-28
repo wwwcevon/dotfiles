@@ -55,7 +55,7 @@ export NODE_PATH="/usr/lib/node_modules"
 [[ -s $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
 
 # rvm
-[[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && unset RUBYOPT
+# [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && unset RUBYOPT
 
 # load functions
 . $HOME/.bash_functions
