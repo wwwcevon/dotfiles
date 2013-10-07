@@ -10,7 +10,7 @@ Xft*antialias:  true
 Xft*hinting:    true
 ! -*- }
 
-URxvt.cursorBlink: 1
+! URxvt.cursorBlink: 1
 ! URxvt.cursorUnderline: 1
 
 URxvt.scrollstyle:       rxvt
