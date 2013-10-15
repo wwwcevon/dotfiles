@@ -39,7 +39,7 @@ MAIL=/var/spool/mail/aleiphoenix && export MAIL
 # # for chromium swithy!
 # export GNOME_DESKTOP_SESSION_ID=Default
 
-export HISTCONTROL=ingoreboth
+export HISTCONTROL=ignoreboth
 export HISTSIZE=1000000
 
 # normal PS1
@@ -88,7 +88,6 @@ export PS1
 #     /usr/bin/keychain -q $HOME/.ssh/id_rsa
 #     . $HOME/.keychain/$HOSTNAME-sh
 # fi
-
 unset RUBYOPT
 
 # for tmux-powerline
