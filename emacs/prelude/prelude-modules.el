@@ -6,7 +6,7 @@
 (require 'prelude-lisp)
 (require 'prelude-erc)
 (require 'prelude-org)
-(require 'prelude-markdown)
+;; (require 'prelude-markdown)
 (require 'prelude-perl)
 (require 'prelude-js)
 (require 'prelude-scheme)
