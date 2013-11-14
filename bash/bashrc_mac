@@ -2,70 +2,28 @@
 # Check for an interactive session
 # [[ $- != *i* ]] && exit
 
-# check for gentoo prefix
-gentoo_bash="$HOME/Gentoo/bin/bash"
-if [ $SHELL == $gentoo_bash ]; then
-    export EPREFIX=$HOME/Gentoo
-    export PATH=$EPREFIX/usr/bin:$EPREFIX/usr/sbin:$EPREFIX/bin:$EPREFIX/tmp/usr/bin:$EPREFIX/tmp/bin:/sbin:$PATH
-
-    PS1='\[\e[1;32m\](prefix)\[\e[m\]' # prefix
-    PS1=$PS1'\[\e[1;31m\]\h\[\e[m\] ' # host
-    PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
-    export PS1
-    return
-fi
-
 # path
-# export PATH="/usr/local/bin:/usr/local/sbin:"$PATH
 PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
-# export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin
 
 # CHOST for Mac OS X
 export CHOST="x86_64-apple-darwin12"
-# CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
-# export CFLAGS='-arch x86_64 -march=nocona -g -O2 -pipe -no-cpp-precomp'
-# CFLAGS='-arch i386 -arch x86_64 -march=nocona -g -O3 -pipe -no-cpp-precomp'
-# export CXXFLAGS="${CFLAGS}"
-# LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
-# LDFLAGS='-arch i386 -arch x86_64 -bind_at_load'
-# export LDFLAGS='-arch x86_64 -bind_at_load -L/usr/local/opt/gettext/lib'
-# export CPPFLAGS='-I/usr/local/opt/gettext/include'
+
+if [[ -n "$PS1" ]]; then
+    complete -cf sudo
+fi
+
+# homebrew
+export HOMEBREW_TEMP="/usr/local/tmp"
 
 # bash completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
-# coreutils
-# if [[ -s `brew --prefix coreutils`/libexec/gnubin ]]; then
-#   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-# fi
-
-# colordiff
-# if [[ -n $()ommand -v colordiff ]]; then
-#   alias diff="colordiff -u"
-# fi
-
-# homebrew
-export HOMEBREW_TEMP="/usr/local/tmp"
-
-# colorsvn
-/usr/local/etc/profile.d/colorsvn-env.sh
-
 # color for ls in terminal
 export CLICOLOR=1
-# export LSCOLORS=fxfxcxdxbxegedabagacad
-
-
-# add ssh key
-if [ -f $HOME/.ssh/id_rsa ]; then
-    /usr/local/bin/keychain -q $HOME/.ssh/id_rsa
-    . $HOME/.keychain/$HOSTNAME-sh
-fi
 
 # alias
-alias ipy="env ipython"
-alias svn="env colorsvn"
 alias ll='ls -lAFhG'
 alias grep='grep --color'
 alias ls="ls"
@@ -75,21 +33,15 @@ alias tmux='/usr/bin/env tmux -2'
 alias memacs='~/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias e="emacsclient -t"
 alias ec="emacsclient -c"
-alias vim="emacsclient -t"
-alias vi="emacsclient -t"
-alias E="~/Applications/Emacs.app/Contents/MacOS/Emacs"
+alias ed="emacs --daemon"
 alias z="zile"
 
 [[ -n "$(command -v mvim)" ]] && alias vim="mvim" && alias vi="mvim -v"
 
-if [ "$PS1" ]; then
-    complete -cf sudo
-fi
-
 export NODE_PATH="/usr/local/lib/node_modules"
 
 # export EDITOR="mvim"
-export EDITOR="emacs"
+export EDITOR="e"
 
 export HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
@@ -99,43 +51,17 @@ shopt -s checkwinsize
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-
-# normal PS1
-export PS1="\u@\h \W \$ "
-
-# Load alternative php
-[[ -d /usr/local/php-5.4.0 ]] && export PATH="/usr/local/php-5.4.0/bin:$PATH"
-
-# Load RVM function
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # && export PATH="$HOME/.rvm/bin:$PATH"
-
-# perlbrew
-[[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"
-
-# android SDK
-# [[ -d "$HOME/sources/android-sdk-macosx" ]] && export PATH="$HOME/sources/android-sdk-macosx/tools:$HOME/sources/android-sdk-macosx/platform-tools:$HOME/sources/android-sdk-macosx/platforms:$PATH"
-
-# eclipse
-# [[ -d "$HOME/eclipse" ]] && export PATH="$HOME/eclipse:$PATH"
-
-# check for pythonbrew
-[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
-
-# check for phpbrew
-[[ -e $HOME/.phpbrew/scripts/phpbrew ]] && source $HOME/.phpbrew/scripts/phpbrew
+# basic PS1
+export PS1="\h \W \$ "
 
 [ -f $HOME/.bash_functions ] && . $HOME/.bash_functions
 
 if [ $(function_exists __git_ps1) == 'function' ]; then
     PS1='\[\e[1;31m\]θ\[\e[m\] ' # host
     PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
-    PS1=$PS1'\[\e[1;33m\]$(__ruby_version)\[\e[m\]' # rvm
+    PS1=$PS1'\[\e[1;33m\]$(__rbenv_ps1)\[\e[m\]' # rbenv
     PS1=$PS1'\[\e[1;32m\]$(__parse_git)\[\e[m\]' # git
     export PS1
 fi
-
-export GOPATH="$HOME/projects/go/mygo"
-export PATH="$PATH:$HOME/projects/go/mygo/bin"
-export JAVA_HOME="$(/usr/libexec/java_home --version 1.7.0_u9)"
 
 [[ -s $HOME/.bashrc_mac_after ]] && . $HOME/.bashrc_mac_after
