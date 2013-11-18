@@ -7,9 +7,6 @@ if [[ $- != *i* ]] ; then
     return
 fi
 
-
-# Put your fun stuff here.
-
 if [ "$PS1" ]; then
     complete -cf sudo
 fi
@@ -25,19 +22,13 @@ alias ll='ls -lAFh'
 alias grep='grep --color'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
-alias mysql='mysql --default-character-set=utf8 --auto-rehash'
 alias ssh='ssh -A'
-alias vim='emacsclient -t'
-alias vi='emacsclient -t'
 alias e='emacsclient -t'
 alias ec='emacsclient -c'
 alias ed='emacs --daemon'
 
 # mutt
-MAIL=/var/spool/mail/aleiphoenix && export MAIL
-
-# # for chromium swithy!
-# export GNOME_DESKTOP_SESSION_ID=Default
+export MAIL=/var/spool/mail/aleiphoenix
 
 export HISTCONTROL=ignoreboth
 export HISTSIZE=1000000
@@ -47,15 +38,6 @@ export PS1="\u@\h \W \$ "
 
 # nodejs
 export NODE_PATH="/usr/lib/node_modules"
-
-# pythonbrew
-[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
-
-# perlbrew
-[[ -s $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
-
-# rvm
-# [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm && unset RUBYOPT
 
 # load functions
 . $HOME/.bash_functions
@@ -84,10 +66,6 @@ if [[ $(function_exists __git_ps1) == 'function' ]]; then
 fi
 export PS1
 
-# if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
-#     /usr/bin/keychain -q $HOME/.ssh/id_rsa
-#     . $HOME/.keychain/$HOSTNAME-sh
-# fi
 unset RUBYOPT
 
 # for tmux-powerline

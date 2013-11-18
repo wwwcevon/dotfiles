@@ -1,3 +1,6 @@
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 (load-theme 'monokai t)
@@ -59,18 +62,10 @@
 (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
 (add-hook 'sh-mode-hook 'my-sh-settings)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(markdown-command "mashiro"))
+(load
+ (expand-file-name
+  "emacs-realtime-markdown-viewer/realtime-markdown-viewer"
+  prelude-personal-dir))
 
+(setq rtmv:lang 'ruby)
 (set-chinese-font)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
