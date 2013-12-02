@@ -62,10 +62,11 @@
 (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
 (add-hook 'sh-mode-hook 'my-sh-settings)
 
-(load
- (expand-file-name
-  "emacs-realtime-markdown-viewer/realtime-markdown-viewer"
-  prelude-personal-dir))
+(let ((rtmv-module (expand-file-name
+                    "emacs-realtime-markdown-viewer/realtime-markdown-viewer"
+                    prelude-personal-dir)))
+  (if (file-exists-p rtmv-module)
+      load rtmv-module))
 
 (setq rtmv:lang 'ruby)
 (set-chinese-font)
