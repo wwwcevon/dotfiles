@@ -63,10 +63,10 @@
 (add-hook 'sh-mode-hook 'my-sh-settings)
 
 (let ((rtmv-module (expand-file-name
-                    "emacs-realtime-markdown-viewer/realtime-markdown-viewer"
+                    "emacs-realtime-markdown-viewer/realtime-markdown-viewer.el"
                     prelude-personal-dir)))
   (if (file-exists-p rtmv-module)
-      load rtmv-module))
+      (load rtmv-module)))
 
 (setq rtmv:lang 'ruby)
 (set-chinese-font)
