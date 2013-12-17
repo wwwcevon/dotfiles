@@ -2,11 +2,21 @@
 # Check for an interactive session
 # [[ $- != *i* ]] && exit
 
+export GENTOO_PREFIX="/Volumes/MacHDD/Gentoo"
+
+if [[ "$SHELL" == "$GENTOO_PREFIX/bin/bash" ]]; then
+  # gentoo prefix
+  PS1='\[\e[1;31m\](prefix) θ\[\e[m\] ' # host
+  PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
+  export PS1
+  return
+fi
+
 # path
 PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
 
 # CHOST for Mac OS X
-export CHOST="x86_64-apple-darwin12"
+# export CHOST="x86_64-apple-darwin12"
 
 if [[ -n "$PS1" ]]; then
     complete -cf sudo
