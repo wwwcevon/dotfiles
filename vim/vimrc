@@ -14,6 +14,7 @@ set smartindent
 set softtabstop=2
 set expandtab
 set nobackup
+set modeline
 syntax on
 
 "
