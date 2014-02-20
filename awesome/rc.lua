@@ -15,7 +15,7 @@ home = os.getenv("HOME")
 beautiful.init(home .. "/.config/awesome/theme.lua")
 awful.util.spawn_with_shell("command -v fcitx && fcitx");
 awful.util.spawn_with_shell("command -v dropbox && dropbox");
-awful.util.spawn_with_shell("command -v compton && compton -cC -O 0.1 -I 0.1 -D 3 -f -z");
+awful.util.spawn_with_shell("command -v compton && compton -cC -O 0.1 -I 0.1 -D 3 -f -o 0.1");
 awful.util.spawn_with_shell("command -v synergys && /usr/bin/synergys -f " ..
                                "--no-tray --debug NOTE --name miku -c " ..
                                home .. "/.synergys.conf --address :24800");

@@ -18,10 +18,9 @@ URxvt.scrollBar:         false
 URxvt*scrollTtyOutput:   false
 URxvt*scrollWithBuffer:  true
 URxvt*scrollTtyKeypress: true
-URxvt*font:              xft:Menlo:bold:size=9, \
-                         xft:TakaoExGothic:bold:size=9, \
-                         xft:WenQuanYi Micro Hei:bold:size=9
-
+URxvt*font:              fixed, \
+                         xft:WenQuanYi Bitmap Song:size=9, \
+                         xft:Kochi Mincho:size=9
 URxvt*termName:          xterm-256color
 URxvt*loginShell:        true
 

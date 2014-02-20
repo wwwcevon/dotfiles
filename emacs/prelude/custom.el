@@ -57,10 +57,18 @@
   (setq sh-basic-offset 2)
   (setq sh-indentation 2))
 
+(defun my-coffee-settings ()
+  (setq tab-width 2))
+
+(defun my-lua-settings ()
+  (setq lua-indent-level 2))
+
 (add-hook 'php-mode-hook 'my-php-settings)
 (add-hook 'js-mode-hook 'my-js-settings)
-(add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
+;; (add-hook 'before-make-frame-hook #'(lambda () (set-chinese-font)))
 (add-hook 'sh-mode-hook 'my-sh-settings)
+(add-hook 'coffee-mode-hook 'my-coffee-settings)
+(add-hook 'lua-mode-hook 'my-lua-settings)
 
 (let ((rtmv-module (expand-file-name
                     "emacs-realtime-markdown-viewer/realtime-markdown-viewer.el"
@@ -69,4 +77,4 @@
       (load rtmv-module)))
 
 (setq rtmv:lang 'ruby)
-(set-chinese-font)
+;; (set-chinese-font)
