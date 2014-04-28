@@ -33,6 +33,12 @@ hi cursorline gui=UNDERLINE cterm=UNDERLINE
 " remove all trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
+autocmd BufReadPost *
+\ if line("'\"") > 1 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
+
+
 "
 " !!! key bindings !!!
 "
