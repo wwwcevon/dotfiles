@@ -69,6 +69,10 @@
 (add-hook 'sh-mode-hook 'my-sh-settings)
 (add-hook 'coffee-mode-hook 'my-coffee-settings)
 (add-hook 'lua-mode-hook 'my-lua-settings)
+(add-hook 'ebuild-mode-hook (lambda ()
+                              (setq c-basic-offset 2
+                                    tab-width 2
+                                    indent-tab-mode t)))
 
 (let ((rtmv-module (expand-file-name
                     "emacs-realtime-markdown-viewer/realtime-markdown-viewer.el"
