@@ -45,3 +45,4 @@ autocmd BufReadPost *
 
 " normal mode
 nmap <SPACE> <SPACE>:noh<CR>
+set clipboard=exclude:.*
