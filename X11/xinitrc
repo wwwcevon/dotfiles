@@ -10,3 +10,10 @@ if [[ -d $HOME/.xinitrc.d ]]; then
 fi
 
 exec awesome
+
+# feh --bg-fill .awesomebg
+# if [[ -n $(command -v xmodmap) ]] && [[ -s ~/.Xmodmap ]]; then
+#   xmodmap ~/.Xmodmap
+# fi
+#
+# exec xmonad
