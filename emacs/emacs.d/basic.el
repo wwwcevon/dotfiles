@@ -1,9 +1,6 @@
-(require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;;; basic.el
 
-(package-initialize)
-(load-theme 'zenburn t)
+(message "%s" "hello basic")
 
 ;; disable backup
 (setq backup-inhibited t)

@@ -1,6 +1,6 @@
 ! pseudo-transparent
 URxvt*transparent: true
-URxvt*.shading: 25
+URxvt*.shading: 15
 
 URxvt.depth: 32
 
@@ -19,7 +19,7 @@ URxvt*scrollTtyOutput:   false
 URxvt*scrollWithBuffer:  true
 URxvt*scrollTtyKeypress: true
 ! URxvt*font:              xft:DroidSansMono:size=9:bold, \
-URxvt*font:              xft:Menlo:size=9:bold, \
+URxvt*font:              xft:DejaVuSansMono:size=9:bold, \
                          xft:WenQuanYi Zen Hei Mono:size=9, \
                          xft:Kochi Mincho:size=9
 URxvt*termName:          xterm-256color
