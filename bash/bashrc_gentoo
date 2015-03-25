@@ -23,9 +23,7 @@ alias grep='grep --color'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias ssh='ssh -A'
-alias e='emacsclient -t'
-alias ec='emacsclient -c'
-alias ed='emacs --daemon'
+alias e='emacs'
 
 # mutt
 export MAIL=/var/spool/mail/aleiphoenix
