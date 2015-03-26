@@ -76,6 +76,10 @@
       '(("php" . "\\.phtml\\'")
 	("django" . "\\.jinja\\'")))
 
+(add-hook 'web-mode-hook
+	  '(lambda()
+	     (setq indent-tabs-mode nil)
+	     (setq web-mode-markup-indent-offset 2)))
 
 
 ;; emmet-mode
