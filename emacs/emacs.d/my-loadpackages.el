@@ -1,11 +1,12 @@
-;;
+;;; package --- Summary
+;;; Commentary:
 ;; my-loadpackages.el
 ;;
 
 ;; setup ELPA package sources
 (require 'cl)
 
-;; loading package list from another directory
+;;; Code: loading package list from another directory
 (load "~/.emacs.d/my-packages.el")
 
 
@@ -21,12 +22,7 @@
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
 ;; auto-complete
-(require 'auto-complete)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(require 'auto-complete-config)
-(ac-config-default)
-
-
+(load "~/.emacs.d/my-init-auto-complete.el")
 
 ;; yasnippet
 (require 'yasnippet)
@@ -95,6 +91,17 @@
 (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
 (add-hook 'web-mode-hook 'ac-emmet-html-setup)
 
+;; python-mode
+(require 'python-mode)
+(add-hook 'python-mode-hook
+	  '(lambda()
+	     (setq python-indent-level 4)
+	     (setq tab-width 4)))
+
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+
 
 ;; mediawiki
 ;; (require 'mediawiki)
@@ -113,3 +120,6 @@
 ;; gentoo
 (if (package-installed-p 'site-gentoo)
     (require 'site-gentoo))
+
+(provide 'my-loadpackages.el)
+;;; my-loadpackages.el ends here

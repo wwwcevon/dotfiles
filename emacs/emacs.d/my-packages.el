@@ -29,6 +29,7 @@
     markdown-mode
     nginx-mode
     php-mode
+    python-mode
     stylus-mode
     web-mode
     yaml-mode
@@ -41,6 +42,7 @@
     mediawiki
     visual-regexp
     yasnippet
+    jedi
 
     )
   )
