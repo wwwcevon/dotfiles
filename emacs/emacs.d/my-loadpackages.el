@@ -102,6 +102,14 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 
+(require 'lua-mode)
+(add-hook 'lua-mode-hook
+	  '(lambda()
+	     (setq lua-indent-level 2)))
+
+(require 'ido)
+(ido-mode t)
+
 
 ;; mediawiki
 ;; (require 'mediawiki)
