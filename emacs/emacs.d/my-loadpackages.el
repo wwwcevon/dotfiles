@@ -107,6 +107,11 @@
 	  '(lambda()
 	     (setq lua-indent-level 2)))
 
+;; nginx-mode
+(add-hook 'nginx-mode-hook
+	  '(lambda()
+	     (setq nginx-indent-level 2)))
+
 (require 'ido)
 (ido-mode t)
 
