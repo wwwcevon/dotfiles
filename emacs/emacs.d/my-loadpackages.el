@@ -102,6 +102,7 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 
+;; lua-mode
 (require 'lua-mode)
 (add-hook 'lua-mode-hook
 	  '(lambda()
