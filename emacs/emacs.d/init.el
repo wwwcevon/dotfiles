@@ -2,7 +2,7 @@
 ;; Emacs config of AleiPhoenix
 ;;
 
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 (load "~/.emacs.d/my-functions.el")
 
 
@@ -17,4 +17,3 @@
 				 :weight 'bold)
 
 	     (message "startup time was %s" (emacs-uptime "%s"))))
-

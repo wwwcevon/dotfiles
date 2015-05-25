@@ -1,6 +1,11 @@
+;;; package --- Summary
+;;; Commentary:
+
 ;;
 ;; my-packages.el
 ;;
+
+;;; Code:
 
 ;; list all packages I want
 (require 'package)
@@ -43,6 +48,7 @@
     visual-regexp
     yasnippet
     jedi
+    mew
 
     )
   )

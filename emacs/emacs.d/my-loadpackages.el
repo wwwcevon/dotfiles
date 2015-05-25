@@ -116,6 +116,42 @@
 (require 'ido)
 (ido-mode t)
 
+(require 'mew)
+(autoload 'mew "mew" nil t)
+(autoload 'mew-send "mew" nil t)
+(autoload 'mew-user-agent-compose "mew" nil t)
+
+(if (boundp 'read-mail-command)
+    (setq read-mail-command 'mew))
+
+(if (boundp 'mail-user-agent)
+    (setq mail-user-agent 'mew-user-agent))
+(if (boundp 'define-mail-user-agent)
+    (define-mail-user-agent
+      'mew-user-agent
+      'mew-user-agent-compose
+      'mew-draft-send-message
+      'mew-draft-kill
+      'mew-send-hook))
+
+(setq read-mail-command 'mew)
+(setq mew-name "AR")
+(setq mew-user "momoka")
+(setq mew-mail-domain "momoka.net")
+(setq mew-mail-path "~/.mail")
+
+(setq mew-proto "%")
+(setq mew-imap-user "aleiphoenix@gmail.com")
+(setq mew-imap-server "dyn.momoka.net")
+
+(setq mew-use-unread-mark t)
+(setq mew-summary-form '((5 type) " " (5 date) " " (5 time) "  " (25 from) " " t (0 subj)))
+(setq mew-summary-form-extract-rule '(address))
+
+(setq mew-use-cached-passwd t)
+(setq mew-imap-trash-folder "%trash-bin")
+
+(load "~/.emacs.d/my-init-mew.el")
 
 ;; mediawiki
 ;; (require 'mediawiki)
