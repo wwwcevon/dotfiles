@@ -68,6 +68,7 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jinja\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mako$" . web-mode))
 (setq web-mode-engines-alist
       '(("php" . "\\.phtml\\'")
 	("django" . "\\.jinja\\'")))
@@ -116,40 +117,6 @@
 (require 'ido)
 (ido-mode t)
 
-(require 'mew)
-(autoload 'mew "mew" nil t)
-(autoload 'mew-send "mew" nil t)
-(autoload 'mew-user-agent-compose "mew" nil t)
-
-(if (boundp 'read-mail-command)
-    (setq read-mail-command 'mew))
-
-(if (boundp 'mail-user-agent)
-    (setq mail-user-agent 'mew-user-agent))
-(if (boundp 'define-mail-user-agent)
-    (define-mail-user-agent
-      'mew-user-agent
-      'mew-user-agent-compose
-      'mew-draft-send-message
-      'mew-draft-kill
-      'mew-send-hook))
-
-(setq read-mail-command 'mew)
-(setq mew-name "AR")
-(setq mew-user "momoka")
-(setq mew-mail-domain "momoka.net")
-(setq mew-mail-path "~/.mail")
-
-(setq mew-proto "%")
-(setq mew-imap-user "aleiphoenix@gmail.com")
-(setq mew-imap-server "dyn.momoka.net")
-
-(setq mew-use-unread-mark t)
-(setq mew-summary-form '((5 type) " " (5 date) " " (5 time) "  " (25 from) " " t (0 subj)))
-(setq mew-summary-form-extract-rule '(address))
-
-(setq mew-use-cached-passwd t)
-(setq mew-imap-trash-folder "%trash-bin")
 
 (load "~/.emacs.d/my-init-mew.el")
 
@@ -157,15 +124,15 @@
 ;; (require 'mediawiki)
 
 ;; w3m
-;; (require 'w3m)
-;; (setq w3m-home-page "http://emacs-w3m.namazu.org/")
-;; (setq browse-url-browser-function 'w3m-browse-url
-;;       browse-url-new-window-flag t)
-;;
-;; (autoload 'browse-url-interactive-arg "browse-url")
-;; (autoload 'w3m-browse-url "w3m" "" t)
-;; (global-set-key (kdb "C-x m") 'browse-url-at-point)
-;; (global-set-key (kdb "C-x t") 'browse-url)
+(require 'w3m)
+(setq w3m-home-page "http://emacs-w3m.namazu.org/")
+(setq browse-url-browser-function 'w3m-browse-url
+      browse-url-new-window-flag t)
+
+(autoload 'browse-url-interactive-arg "browse-url")
+(autoload 'w3m-browse-url "w3m" "" t)
+(global-set-key (kbd "C-x C-m") 'browse-url-at-point)
+(global-set-key (kbd "C-x t") 'browse-url)
 
 ;; gentoo
 (if (package-installed-p 'site-gentoo)
