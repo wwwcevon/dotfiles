@@ -48,7 +48,6 @@
     flycheck
     highlight-indentation
     jedi
-    mediawiki
     mew
     undo-tree
     visual-regexp

@@ -118,11 +118,21 @@
 (require 'ido)
 (ido-mode t)
 
-
 (load "~/.emacs.d/my-init-mew.el")
 
+;; visual wrap
+(load "~/.emacs.d/my-visual-wrap.el")
+
 ;; mediawiki
-;; (require 'mediawiki)
+(load "~/.emacs.d/mediawiki.el")
+(require 'mediawiki)
+(add-to-list 'auto-mode-alist '("\\.wiki$" . mediawiki-mode))
+(add-to-list 'auto-mode-alist '("\\.mediawiki$" . mediawiki-mode))
+(add-hook 'mediawiki-mode-hook
+	  '(lambda()
+	     (setq visual-wrap-column 80)
+	     (set-visual-wrap-column 80)))
+
 
 ;; w3m
 (require 'w3m)
@@ -143,6 +153,8 @@
 ;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
+
+
 
 ;; gentoo
 (if (package-installed-p 'site-gentoo)
