@@ -28,6 +28,7 @@
     coffee-mode
     emmet-mode
     go-mode
+    haskell-mode
     jade-mode
     js2-mode
     lua-mode
@@ -35,6 +36,8 @@
     nginx-mode
     php-mode
     python-mode
+    sass-mode
+    scss-mode
     stylus-mode
     web-mode
     yaml-mode
@@ -44,11 +47,12 @@
     ac-emmet
     flycheck
     highlight-indentation
+    jedi
     mediawiki
+    mew
+    undo-tree
     visual-regexp
     yasnippet
-    jedi
-    mew
 
     )
   )

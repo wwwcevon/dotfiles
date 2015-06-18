@@ -36,6 +36,7 @@
 ;; js2-mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-hook 'js2-mode-hook
 	  '(lambda()
 	     (setq indent-tabs-mode nil)
@@ -133,6 +134,15 @@
 (autoload 'w3m-browse-url "w3m" "" t)
 (global-set-key (kbd "C-x C-m") 'browse-url-at-point)
 (global-set-key (kbd "C-x t") 'browse-url)
+
+;; haskell-mode
+(require 'haskell-mode)
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+
+;; undo-tree
+(require 'undo-tree)
+(global-undo-tree-mode)
 
 ;; gentoo
 (if (package-installed-p 'site-gentoo)
