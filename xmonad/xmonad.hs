@@ -1,16 +1,27 @@
-import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Spacing
-import XMonad.Util.Run(spawnPipe)
-import Data.Monoid
 import System.Exit
 import System.IO
+
+import XMonad
+import XMonad.Actions.GridSelect
+import XMonad.Actions.Navigation2D
+import XMonad.Actions.WindowNavigation
+import XMonad.Layout.Gaps
+import XMonad.Layout.FixedColumn
+import XMonad.Layout.LimitWindows
+import XMonad.Layout.Magnifier
+import XMonad.Layout.Spacing
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.WindowNavigation
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+
+import XMonad.Util.Run(spawnPipe)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- terminal
+myTerminal :: [Char]
 myTerminal = "urxvt"
 
 -- whether focus follows the mouse pointer
@@ -18,6 +29,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 -- width of the window border in pixels
+myBorderWidth :: Dimension
 myBorderWidth = 2
 
 -- mod key
@@ -29,6 +41,8 @@ myWorkspaces = ["term", "web", "im", "rdp", "misc"]
 -- border colors
 myNormalBorderColor = "#1c2022"
 myFocusedBorderColor = "#606060"
+
+myGSConfig = defaultGSConfig { gs_font = "xft:monospace:size=8:bold" }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -53,26 +67,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- move focus to the next window
   , ((modm, xK_Tab), windows W.focusDown)
 
-  -- move focus to the next window
-  , ((modm, xK_j), windows W.focusDown)
-
-  -- move focus to the previous window
-  , ((modm, xK_k), windows W.focusUp)
-
   -- move focus to the master window
   , ((modm, xK_m), windows W.swapMaster)
 
-  -- swap the focused window with the next window
-  , ((modm .|. shiftMask, xK_j), windows W.swapDown)
-
-  -- swap the focused window with the previous window
-  , ((modm .|. shiftMask, xK_k), windows W.swapUp)
-
-  -- shrink the master area
-  , ((modm, xK_h), sendMessage Shrink)
-
-  -- swap the focused window with the previous window
-  , ((modm, xK_l), sendMessage Expand)
+  -- grid select
+  , ((modm, xK_z), goToSelected $ myGSConfig)
 
   -- push window back to tiling
   , ((modm, xK_t), withFocused $ windows . W.sink)
@@ -89,7 +88,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- quit
   , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
 
-  , ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart") ]
+  -- browser
+  , ((modm, xK_q), spawn "firefox")
+
+  -- emacs
+  , ((modm, xK_s), spawn "emacs")
+
+  -- reload config
+  , ((modm .|. controlMask, xK_r), spawn "xmonad --recompile; xmonad --restart") ]
   ++
 
   [((m .|. modm, k), windows $ f i)
@@ -103,12 +109,17 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                      >> windows W.shiftMaster)) ]
 
-myLayout = tiled ||| Mirror tiled ||| Full
-  where
-    tiled = Tall nmaster delta ratio
-    nmaster = 1
-    ratio = 1/2
-    delta = 3/100
+myGap = gaps [(U, 10), (D, 10), (L, 10), (R, 10)]
+
+myLayout = Mirror fixed ||| tiled ||| Mirror tiled ||| full
+   where
+     tiled = myGap $ Tall nmaster delta ratio
+     full = myGap $ Full
+     nmaster = 1
+     delta = 3/100
+     ratio = 1/2
+     fixed = myGap $ limitWindows 6 $ magnifiercz 1.1 $ spacing 10 $
+             FixedColumn 3 20 80 10
 
 myManageHook = composeAll
   [ className =? "Firefox" --> doFloat
@@ -116,31 +127,37 @@ myManageHook = composeAll
   , className =? "Eclipse" --> doFloat
   , className =? "Pidgin" --> doFloat ]
 
+myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
                    spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 17"
+                   spawn "feh --bg-fill ~/.awesomebg"
 
+main :: IO()
 main = do
   xmproc <- spawnPipe "xmobar"
-  xmonad $ defaultConfig {
-  -- simple stuff
-  terminal           = myTerminal,
-  focusFollowsMouse  = myFocusFollowsMouse,
-  borderWidth        = myBorderWidth,
-  modMask            = myModMask,
-  workspaces         = myWorkspaces,
-  normalBorderColor  = myNormalBorderColor,
-  focusedBorderColor = myFocusedBorderColor,
+  config <- withWindowNavigation (xK_k, xK_h, xK_j, xK_l)
+            $ defaultConfig {
+    -- simple stuff
+    terminal           = myTerminal,
+    focusFollowsMouse  = myFocusFollowsMouse,
+    borderWidth        = myBorderWidth,
+    modMask            = myModMask,
+    workspaces         = myWorkspaces,
+    normalBorderColor  = myNormalBorderColor,
+    focusedBorderColor = myFocusedBorderColor,
 
-  -- keys bindings
-  keys               = myKeys,
-  mouseBindings      = myMouseBindings,
+    -- keys bindings
+    keys               = myKeys,
+    mouseBindings      = myMouseBindings,
 
-  -- hooks, layouts
-  layoutHook         = avoidStruts $ myLayout,
-  manageHook         = manageDocks <+> myManageHook,
-  startupHook        = myStartupHook,
-  logHook            = dynamicLogWithPP xmobarPP
+    -- hooks, layouts
+    layoutHook         = avoidStruts $ myLayout,
+    manageHook         = manageDocks <+> myManageHook,
+    startupHook        = myStartupHook,
+    logHook            = dynamicLogWithPP xmobarPP
                          { ppOutput = hPutStrLn xmproc
                          , ppTitle = xmobarColor "green" "" . shorten 50
                          }
-  }
+    }
+
+  xmonad config

@@ -130,8 +130,8 @@
 (add-to-list 'auto-mode-alist '("\\.mediawiki$" . mediawiki-mode))
 (add-hook 'mediawiki-mode-hook
 	  '(lambda()
-	     (setq visual-wrap-column 80)
-	     (set-visual-wrap-column 80)))
+	     (setq visual-wrap-column 78)
+	     (set-visual-wrap-column 78)))
 
 
 ;; w3m
