@@ -147,7 +147,7 @@ tangoTheme = TI { themeName = "Tango!"
                 }
 
 myTheme :: Theme
-myTheme = (theme tangoTheme) { fontName = "xft:monospace:size=8:bold" }
+myTheme = (theme tangoTheme) { fontName = "xft:monospace:size=10:bold" }
 
 ---
 --- Theme }}
@@ -156,8 +156,9 @@ myTheme = (theme tangoTheme) { fontName = "xft:monospace:size=8:bold" }
 ---
 --- {{ Layouts
 ---
-termLayout = limitWindows 6 $ magnifiercz 1.1 $ Mirror $ FixedColumn 3 20 80 10
-webLayout  = Tall nmaster delta ratio
+termLayout = limitWindows 6 $ Mirror $ FixedColumn 3 20 80 30
+
+tiledLayout  = Tall nmaster delta ratio
              where
                -- The default number of windows in the master pane
                nmaster = 1
@@ -165,20 +166,29 @@ webLayout  = Tall nmaster delta ratio
                delta   = 3/100
                -- Default proportion of screen occupied by master pane
                ratio   = 70/100
+
+twitterLayout' l = withIM size roster l
+                   where
+                     size = 2%7
+                     roster = Title "mikutter"
+
+twitterLayout = twitterLayout' tiledLayout
+
 chatLayout' l = withIM size roster l
-               where
-                 -- Ratio of screen roster will occupy
-                 size = 1%5
-                 -- Match roster window
-                 roster = Title "Buddy List"
+                where
+                  -- Ratio of screen roster will occupy
+                  size = 1%5
+                  -- Match roster window
+                  roster = Title "Buddy List"
+
 chatLayout = chatLayout' Grid
 
-codeFirst = termLayout ||| webLayout ||| chatLayout
-tallFirst = webLayout ||| chatLayout ||| termLayout
-gridFirst = chatLayout ||| tallFirst ||| codeFirst
+codeFirst = termLayout
+tallFirst = twitterLayout
+gridFirst = chatLayout
 
 withTitles l = noFrillsDeco shrinkText myTheme (desktopLayoutModifiers l)
-noTitles l = desktopLayoutModifiers l
+oTitles l = desktopLayoutModifiers l
 
 myGap = gaps [(U, 10), (D, 10), (L, 10), (R, 10)]
 
@@ -204,7 +214,7 @@ myManageHook = composeAll
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
-                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 17"
+                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 19"
                    spawn "feh --bg-fill ~/.awesomebg"
 
 main :: IO()
