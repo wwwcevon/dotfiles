@@ -2,23 +2,37 @@ import System.Exit
 import System.IO
 
 import XMonad
+import XMonad.Config.Desktop
 import XMonad.Actions.GridSelect
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.WindowNavigation
 import XMonad.Layout.Gaps
+import XMonad.Layout.Grid
 import XMonad.Layout.FixedColumn
+import XMonad.Layout.IM
 import XMonad.Layout.LimitWindows
 import XMonad.Layout.Magnifier
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.NoBorders
+import XMonad.Layout.NoFrillsDecoration
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.WindowNavigation
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Themes (ThemeInfo(..))
 
-import XMonad.Util.Run(spawnPipe)
+import Data.Ratio ((%))
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import qualified XMonad.Layout.MultiToggle as MToggle
 
 -- terminal
 myTerminal :: [Char]
@@ -70,6 +84,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- move focus to the master window
   , ((modm, xK_m), windows W.swapMaster)
 
+  -- toggle fullscreen
+  , ((modm, xK_f), sendMessage $ MToggle.Toggle FULL)
+
   -- grid select
   , ((modm, xK_z), goToSelected $ myGSConfig)
 
@@ -109,23 +126,81 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                      >> windows W.shiftMaster)) ]
 
+
+---
+--- {{ Theme
+---
+
+tangoTheme :: ThemeInfo
+tangoTheme = TI { themeName = "Tango!"
+                , theme = defaultTheme { activeColor         = "#3465a4"
+                                       , activeTextColor     = "#eeeeec"
+                                       , activeBorderColor   = "#204a87"
+                                       , inactiveColor       = "#2e3436"
+                                       , inactiveTextColor   = "#d3d7cf"
+                                       , inactiveBorderColor = "#2e3436"
+                                       , urgentColor         = "#2e3436"
+                                       , urgentTextColor     = "#f57900"
+                                       , urgentBorderColor   = "#ce5c00"
+                                       , decoHeight          = 16
+                                       }
+                }
+
+myTheme :: Theme
+myTheme = (theme tangoTheme) { fontName = "xft:monospace:size=8:bold" }
+
+---
+--- Theme }}
+---
+
+---
+--- {{ Layouts
+---
+termLayout = limitWindows 6 $ magnifiercz 1.1 $ Mirror $ FixedColumn 3 20 80 10
+webLayout  = Tall nmaster delta ratio
+             where
+               -- The default number of windows in the master pane
+               nmaster = 1
+               -- Percent of screen to increment by when resizing pane
+               delta   = 3/100
+               -- Default proportion of screen occupied by master pane
+               ratio   = 70/100
+chatLayout' l = withIM size roster l
+               where
+                 -- Ratio of screen roster will occupy
+                 size = 1%5
+                 -- Match roster window
+                 roster = Title "Buddy List"
+chatLayout = chatLayout' Grid
+
+codeFirst = termLayout ||| webLayout ||| chatLayout
+tallFirst = webLayout ||| chatLayout ||| termLayout
+gridFirst = chatLayout ||| tallFirst ||| codeFirst
+
+withTitles l = noFrillsDeco shrinkText myTheme (desktopLayoutModifiers l)
+noTitles l = desktopLayoutModifiers l
+
 myGap = gaps [(U, 10), (D, 10), (L, 10), (R, 10)]
 
-myLayout = Mirror fixed ||| tiled ||| Mirror tiled ||| full
-   where
-     tiled = myGap $ Tall nmaster delta ratio
-     full = myGap $ Full
-     nmaster = 1
-     delta = 3/100
-     ratio = 1/2
-     fixed = myGap $ limitWindows 6 $ magnifiercz 1.1 $ spacing 10 $
-             FixedColumn 3 20 80 10
+perWorkSpace = onWorkspace "term" (myGap $ spacing 10 $ codeFirst) $
+               onWorkspace "web" (withTitles $ myGap $ tallFirst) $
+               onWorkspace "im" (withTitles $ myGap $ spacing 10 $ gridFirst) $
+               onWorkspace "twitter" (withTitles $ myGap $ spacing 10 $ gridFirst) $
+               codeFirst
+
+myLayout = smartBorders $ mkToggle (NOBORDERS ?? FULL ?? EOT) $
+           toggleLayouts Full perWorkSpace
+
+     -- fixed   = smartBorders $
+---
+--- Layouts }}
+---
 
 myManageHook = composeAll
-  [ className =? "Firefox" --> doFloat
-  , className =? "Gimp" --> doFloat
+  [ className =? "Gimp" --> doFloat
   , className =? "Eclipse" --> doFloat
-  , className =? "Pidgin" --> doFloat ]
+  , className =? "Pidgin" --> doFloat
+  , composeOne [isFullscreen -?> doFullFloat] ]
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
@@ -136,7 +211,7 @@ main :: IO()
 main = do
   xmproc <- spawnPipe "xmobar"
   config <- withWindowNavigation (xK_k, xK_h, xK_j, xK_l)
-            $ defaultConfig {
+           $ defaultConfig {
     -- simple stuff
     terminal           = myTerminal,
     focusFollowsMouse  = myFocusFollowsMouse,
