@@ -128,7 +128,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm, xK_c), spawn "pidgin")
 
   -- reload config
-  , ((modm .|. controlMask, xK_r), spawn "xmonad --recompile; xmonad --restart") ]
+  , ((modm .|. controlMask, xK_r), spawn "killall trayer; xmonad --recompile; xmonad --restart") ]
   ++
 
   [((m .|. modm, k), windows $ f i)
@@ -194,8 +194,8 @@ myLayout = avoidStruts $ smartBorders $ gap $ toggleFull
     tileWide = renamed [Replace "[tile wide]"] $ Mirror $ Tall nmaster delta thirds
     max      = renamed [Replace "[max]"] $ Full
 
-    term     = renamed [Replace "[term]"] $ spacing 10 $ limitWindows 6
-               $ reflectVert $ Mirror $ FixedColumn 3 20 80 30
+    term     = renamed [Replace "[term]"] $ limitWindows 6 $ spacing 10
+               $ Mirror $ FixedColumn 3 20 80 10
 
     chat     = renamed [Replace "[chat]"] $ spacing 10 $ reflectHoriz $ pidgin
 
