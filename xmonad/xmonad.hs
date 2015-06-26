@@ -1,34 +1,44 @@
+import Data.Ratio ((%))
 import System.Exit
 import System.IO
 
+
+
 import XMonad
-import XMonad.Config.Desktop
 import XMonad.Actions.GridSelect
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.WindowNavigation
+import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Drawer
 import XMonad.Layout.Gaps
 import XMonad.Layout.Grid
 import XMonad.Layout.FixedColumn
 import XMonad.Layout.IM
 import XMonad.Layout.LimitWindows
+import XMonad.Layout.MagicFocus
 import XMonad.Layout.Magnifier
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
 import XMonad.Layout.NoFrillsDecoration
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Reflect
+import XMonad.Layout.Renamed
+import XMonad.Layout.Simplest
+import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.WindowNavigation
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
+import XMonad.Prompt(defaultXPConfig)
+import XMonad.Prompt.Ssh
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.Themes (ThemeInfo(..))
 
-import Data.Ratio ((%))
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -105,11 +115,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- quit
   , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
 
+  -- ssh
+  , ((modm .|. controlMask, xK_s), sshPrompt defaultXPConfig)
+
   -- browser
   , ((modm, xK_q), spawn "firefox")
 
   -- emacs
   , ((modm, xK_s), spawn "emacs")
+
+  -- pidgin
+  , ((modm, xK_c), spawn "pidgin")
 
   -- reload config
   , ((modm .|. controlMask, xK_r), spawn "xmonad --recompile; xmonad --restart") ]
@@ -156,52 +172,44 @@ myTheme = (theme tangoTheme) { fontName = "xft:monospace:size=10:bold" }
 ---
 --- {{ Layouts
 ---
-termLayout = limitWindows 6 $ Mirror $ FixedColumn 3 20 80 30
 
-tiledLayout  = Tall nmaster delta ratio
-             where
-               -- The default number of windows in the master pane
-               nmaster = 1
-               -- Percent of screen to increment by when resizing pane
-               delta   = 3/100
-               -- Default proportion of screen occupied by master pane
-               ratio   = 70/100
+myLayout = avoidStruts $ smartBorders $ gap $ toggleFull
+           $ onWorkspaces ["term"] (term)
+           $ onWorkspaces ["web"] (web)
+           $ onWorkspaces ["im"] (chat)
+           $ onWorkspaces ["rdp"] (float)
+           $ (float ||| tileTall ||| tileWide ||| max)
+  where
 
-twitterLayout' l = withIM size roster l
-                   where
-                     size = 2%7
-                     roster = Title "mikutter"
+    nmaster  = 1
+    delta    = 3/100
+    vhalf    = 1/2
+    thirds   = 1/3
+    ratio    = 7/10
 
-twitterLayout = twitterLayout' tiledLayout
+    float    = renamed [Replace "[float]"] $ simplestFloat
+    tileTall = renamed [Replace "[tile tall]"]
+               $ withTitles (Tall nmaster delta ratio)
 
-chatLayout' l = withIM size roster l
-                where
-                  -- Ratio of screen roster will occupy
-                  size = 1%5
-                  -- Match roster window
-                  roster = Title "Buddy List"
+    tileWide = renamed [Replace "[tile wide]"] $ Mirror $ Tall nmaster delta thirds
+    max      = renamed [Replace "[max]"] $ Full
 
-chatLayout = chatLayout' Grid
+    term     = renamed [Replace "[term]"] $ spacing 10 $ limitWindows 6
+               $ reflectVert $ Mirror $ FixedColumn 3 20 80 30
 
-codeFirst = termLayout
-tallFirst = twitterLayout
-gridFirst = chatLayout
+    chat     = renamed [Replace "[chat]"] $ spacing 10 $ reflectHoriz $ pidgin
 
-withTitles l = noFrillsDeco shrinkText myTheme (desktopLayoutModifiers l)
-oTitles l = desktopLayoutModifiers l
 
-myGap = gaps [(U, 10), (D, 10), (L, 10), (R, 10)]
+    web      = renamed [Replace "[web]"] $ mikutter `onRight` tileTall
+    mikutter = simpleDrawer 0.01 0.4 (Title "mikutter")
+    pidgin   = withIM (1%5) (Title "Buddy List") Grid
 
-perWorkSpace = onWorkspace "term" (myGap $ spacing 10 $ codeFirst) $
-               onWorkspace "web" (withTitles $ myGap $ tallFirst) $
-               onWorkspace "im" (withTitles $ myGap $ spacing 10 $ gridFirst) $
-               onWorkspace "twitter" (withTitles $ myGap $ spacing 10 $ gridFirst) $
-               codeFirst
+    toggleFull = mkToggle (NOBORDERS ?? FULL ?? EOT)
 
-myLayout = smartBorders $ mkToggle (NOBORDERS ?? FULL ?? EOT) $
-           toggleLayouts Full perWorkSpace
+    gap     = gaps [(U, 10), (D, 10), (L, 10), (R, 10)]
+    withTitles l = noFrillsDeco shrinkText myTheme (desktopLayoutModifiers l)
+    -- noTitles l = desktopLayoutModifiers l
 
-     -- fixed   = smartBorders $
 ---
 --- Layouts }}
 ---
@@ -209,12 +217,11 @@ myLayout = smartBorders $ mkToggle (NOBORDERS ?? FULL ?? EOT) $
 myManageHook = composeAll
   [ className =? "Gimp" --> doFloat
   , className =? "Eclipse" --> doFloat
-  , className =? "Pidgin" --> doFloat
   , composeOne [isFullscreen -?> doFullFloat] ]
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
-                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 19"
+                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 17"
                    spawn "feh --bg-fill ~/.awesomebg"
 
 main :: IO()
@@ -236,7 +243,7 @@ main = do
     mouseBindings      = myMouseBindings,
 
     -- hooks, layouts
-    layoutHook         = avoidStruts $ myLayout,
+    layoutHook         = myLayout,
     manageHook         = manageDocks <+> myManageHook,
     startupHook        = myStartupHook,
     logHook            = dynamicLogWithPP xmobarPP

@@ -1,4 +1,4 @@
-Config { font = "xft:Tamsyn:size=10, xft:Sans:size=10"
+Config { font = "xft:Tamsyn:size=10:bold, xft:Sans:size=10:bold"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
