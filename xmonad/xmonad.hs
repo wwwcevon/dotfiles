@@ -128,7 +128,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm, xK_c), spawn "pidgin")
 
   -- reload config
-  , ((modm .|. controlMask, xK_r), spawn "killall trayer; xmonad --recompile; xmonad --restart") ]
+  , ((modm .|. controlMask, xK_r), spawn "killall trayer; killall -9 xwrits; xmonad --recompile; xmonad --restart") ]
   ++
 
   [((m .|. modm, k), windows $ f i)
@@ -230,6 +230,7 @@ myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
                    spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 17"
                    spawn "feh --bg-fill ~/.awesomebg"
+                   spawn "xwrits +idle=2 +finger +clock +breakclock +top +mouse t=37 b=3 max=7 +multiply=:7 after=7 b=5 max=77 +multiply=:.07 flash=:.07"
 
 main :: IO()
 main = do
