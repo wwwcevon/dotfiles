@@ -217,7 +217,14 @@ myLayout = avoidStruts $ smartBorders $ gap $ toggleFull
 myManageHook = composeAll
   [ className =? "Gimp" --> doFloat
   , className =? "Eclipse" --> doFloat
-  , composeOne [isFullscreen -?> doFullFloat] ]
+  , composeOne [isFullscreen -?> doFullFloat]
+
+  , composeOne
+    [ transience
+    , className =? "Firefox" -?> doF (W.shift "web")
+    , className =? "Pidgin" -?> doF (W.shift "im")
+    ]
+  ]
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
