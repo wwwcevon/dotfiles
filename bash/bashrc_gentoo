@@ -23,7 +23,9 @@ alias grep='grep --color'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias ssh='ssh -A'
-alias e='emacs -nw'
+alias ed='emacs --daemon'
+alias e='emacsclient -t'
+alias ec='emacsclient'
 
 export HISTCONTROL=ignoreboth
 export HISTSIZE=1000000

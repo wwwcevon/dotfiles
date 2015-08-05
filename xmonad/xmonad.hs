@@ -74,7 +74,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
   -- dmenu
-  , ((modm, xK_r), spawn "/usr/bin/dmenu_run")
+  , ((modm, xK_r), spawn "/usr/bin/dmenu_run -fn DejaVuSansMono")
 
   -- close window
   , ((modm .|. shiftMask, xK_c), kill)
@@ -194,8 +194,9 @@ myLayout = avoidStruts $ smartBorders $ gap $ toggleFull
     tileWide = renamed [Replace "[tile wide]"] $ Mirror $ Tall nmaster delta thirds
     max      = renamed [Replace "[max]"] $ Full
 
-    term     = renamed [Replace "[term]"] $ limitWindows 6 $ spacing 10
-               $ Mirror $ FixedColumn 3 20 80 10
+    term     = renamed [Replace "[term]"] $ reflectVert $ reflectHoriz $
+               limitWindows 6 $ spacing 10
+               $ Mirror $ FixedColumn 3 10 80 10
 
     chat     = renamed [Replace "[chat]"] $ spacing 10 $ reflectHoriz $ pidgin
 
@@ -228,7 +229,7 @@ myManageHook = composeAll
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
-                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 17"
+                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 20"
                    spawn "feh --bg-fill ~/.awesomebg"
                    spawn "xwrits +idle=2 +finger +clock +breakclock +top +mouse t=37 b=3 max=7 +multiply=:7 after=7 b=5 max=77 +multiply=:.07 flash=:.07"
 

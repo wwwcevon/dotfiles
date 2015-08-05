@@ -156,6 +156,16 @@
 
 
 
+;; c-mode
+(add-hook 'c-mode-hook
+	  (lambda()
+	    (setq c-default-style "linux"
+		  c-indent-tab-mode t
+		  tab-width 8
+		  c-basic-offset 8)))
+
+
+
 ;; gentoo
 (if (package-installed-p 'site-gentoo)
     (require 'site-gentoo))

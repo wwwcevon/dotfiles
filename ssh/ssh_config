@@ -4,7 +4,7 @@ Host *
     CompressionLevel 9
     ControlMaster auto
     ControlPath /tmp/%r@%h:%p
-    Cipher blowfish
+    Cipher blowfish-cbc
 
 # Host completion_name_here
 #     HostName the_real_address
