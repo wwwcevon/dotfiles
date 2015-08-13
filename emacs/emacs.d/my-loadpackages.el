@@ -147,7 +147,7 @@
 
 ;; haskell-mode
 (require 'haskell-mode)
-(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 
 ;; undo-tree
