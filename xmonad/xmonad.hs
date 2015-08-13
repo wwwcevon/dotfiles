@@ -43,6 +43,7 @@ import XMonad.Util.Themes (ThemeInfo(..))
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import qualified XMonad.Layout.MultiToggle as MToggle
+import qualified XMonad.Layout.Magnifier as Magnifier
 
 -- terminal
 myTerminal :: [Char]
@@ -54,7 +55,7 @@ myFocusFollowsMouse = True
 
 -- width of the window border in pixels
 myBorderWidth :: Dimension
-myBorderWidth = 2
+myBorderWidth = 3
 
 -- mod key
 myModMask = mod4Mask
@@ -64,7 +65,7 @@ myWorkspaces = ["term", "web", "im", "rdp", "misc"]
 
 -- border colors
 myNormalBorderColor = "#1c2022"
-myFocusedBorderColor = "#606060"
+myFocusedBorderColor = "#1fe0c7"
 
 myGSConfig = defaultGSConfig { gs_font = "xft:monospace:size=8:bold" }
 
@@ -99,6 +100,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
   -- grid select
   , ((modm, xK_z), goToSelected $ myGSConfig)
+
+  -- toggle window magnifier
+  , ((modm, xK_o), sendMessage Magnifier.Toggle)
 
   -- push window back to tiling
   , ((modm, xK_t), withFocused $ windows . W.sink)
@@ -195,7 +199,7 @@ myLayout = avoidStruts $ smartBorders $ gap $ toggleFull
     max      = renamed [Replace "[max]"] $ Full
 
     term     = renamed [Replace "[term]"] $ reflectVert $ reflectHoriz $
-               limitWindows 6 $ spacing 10
+               limitWindows 6 $ spacing 10 $ magnifiercz' 1.2
                $ Mirror $ FixedColumn 3 10 80 10
 
     chat     = renamed [Replace "[chat]"] $ spacing 10 $ reflectHoriz $ pidgin
@@ -229,7 +233,7 @@ myManageHook = composeAll
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
-                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --heighttype pixel --height 20"
+                   spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x262626 --heighttype pixel --height 23"
                    spawn "feh --bg-fill ~/.awesomebg"
                    spawn "xwrits +idle=2 +finger +clock +breakclock +top +mouse t=37 b=3 max=7 +multiply=:7 after=7 b=5 max=77 +multiply=:.07 flash=:.07"
 
@@ -257,7 +261,7 @@ main = do
     startupHook        = myStartupHook,
     logHook            = dynamicLogWithPP xmobarPP
                          { ppOutput = hPutStrLn xmproc
-                         , ppTitle = xmobarColor "green" "" . shorten 50
+                         , ppTitle = xmobarColor "#1fe0f7" "" . shorten 50
                          }
     }
 

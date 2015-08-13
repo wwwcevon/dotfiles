@@ -1,13 +1,57 @@
-Config { font = "xft:Tamsyn:size=12:bold, xft:Sans:size=12:bold"
-       , bgColor = "black"
-       , fgColor = "grey"
-       , position = TopW L 90
-       , commands = [ Run Cpu ["-L", "3", "H", "50", "--normal", "green", "--high", "red"] 10
-                    , Run Memory ["-t", "Mem: <usedratio>%"] 10
-                    , Run Date "%m/%d %H:%M %a" "date" 10
-                    , Run StdinReader
-                    ]
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% <fc=#ee9a00>%date%</fc> "
+-- -*- mode: haskell -*-
+
+Config {
+
+  -- appearance
+  font = "xft:Tamsyn:size=12:bold, xft:Sans:size=12:bold"
+  , bgColor = "#262626"
+  , fgColor = "#d9d9d9"
+  , position = TopW L 90
+  , sepChar = "%"
+  , alignSep = "}{"
+  , template = "%StdinReader% }{ [%battery %] [%cpu%] [%memory%] [%dynnetwork%]  <fc=#1fe0c7>%date%</fc> "
+
+  -- plugins
+  , commands = [
+    Run Cpu [
+        "--template", "CPU: <total>%"
+        , "--Low", "20"
+        , "--High", "50"
+        , "--low", "#2dd24b"
+        , "--normal", "#d4a025"
+        , "--high", "#ff1f1f"
+        ] 5
+
+    , Run Memory [
+      "--template", "Mem: <usedratio>%"
+      ] 5
+
+    , Run DynNetwork [
+      "--template", "<dev>: U:<tx>kB/s|D:<rx>kB/s"
+      , "--Low", "204800"
+      , "--High", "1048576"
+      , "--low", "#2dd24b"
+      , "--normal", "#d4a025"
+      , "--high", "#ff1f1f"
+      ] 10
+
+    , Run Battery [
+      "--template", "Bat: <acstatus>"
+      , "--Low", "40"
+      , "--High", "70"
+      , "--low", "#2dd24b"
+      , "--normal", "#d4a025"
+      , "--high", "#ff1f1f"
+      , "--"
+      , "-o", "<left>% (<timeleft>)"
+      , "-O", "<fc=#d4a025>charing</fc>"
+      , "-i", "<fc=#2dd24b>charged</fc>"
+      ] 30
+
+    , Run Date "%m/%d %H:%M %a" "date" 10
+
+    , Run StdinReader
+
+    ]
+
 }
