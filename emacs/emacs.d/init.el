@@ -12,8 +12,5 @@
 	     (load "~/.emacs.d/my-loadpackages.el")
 	     (load "~/.emacs.d/my-style.el")
 	     (load "~/.emacs.d/my-themes.el")
-	     (set-face-attribute 'default nil
-				 :font "Monospace-9"
-				 :weight 'bold)
 
 	     (message "startup time was %s" (emacs-uptime "%s"))))

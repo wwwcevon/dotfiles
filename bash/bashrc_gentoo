@@ -25,7 +25,7 @@ alias l='ls --color=auto'
 alias ssh='ssh -A'
 alias ed='emacs --daemon'
 alias e='emacsclient -t'
-alias ec='emacsclient'
+alias ec='emacsclient -c'
 
 export HISTCONTROL=ignoreboth
 export HISTSIZE=1000000
