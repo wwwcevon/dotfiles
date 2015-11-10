@@ -36,6 +36,9 @@
         ("Reply-To:"
 	 ("god-rb@googlegroups.com" "%god-rb"))
 
+        ("From:"
+	 ("root@yukari.localdomain" "%trash-bin"))
+
         ("Reply-To:"
 	 ("arch-linux@googlegroups.com" "%archlinux"))
 
@@ -49,7 +52,10 @@
 	 ("sinatrarb@googlegroups.com" "%sinatrarb"))
 
 	("Reply-To:"
-	 ("gentoo-\\(.\\+\\)@lists.gentoo.org" "%gentoo-\\1"))
+	 ("gentoo-user@lists.gentoo.org" "%gentoo-user"))
+
+	("Reply-To:"
+	 ("shlug@googlegroups.com" "%shlug"))
 
 	("From:"
 	 ("billing@linode.com" "%billing"))

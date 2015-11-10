@@ -131,8 +131,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- pidgin
   , ((modm, xK_c), spawn "pidgin")
 
+  -- pidgin
+  , ((modm, xK_k), spawn "/bin/bash -l -c 'mikutter'")
+
   -- reload config
-  , ((modm .|. controlMask, xK_r), spawn "killall trayer; killall -9 xwrits; xmonad --recompile; xmonad --restart") ]
+  , ((modm .|. controlMask, xK_r), spawn "killall -9 trayer-srg; killall -9 xwrits; xmonad --recompile; xmonad --restart") ]
   ++
 
   [((m .|. modm, k), windows $ f i)
@@ -228,6 +231,7 @@ myManageHook = composeAll
   , composeOne
     [ transience
     , className =? "Firefox" -?> doF (W.shift "web")
+    , className =? "mikutter" -?> doF (W.shift "web")
     , className =? "Pidgin" -?> doF (W.shift "im")
     ]
   ]

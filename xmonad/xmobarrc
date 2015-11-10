@@ -9,7 +9,7 @@ Config {
   , position = TopW L 90
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% }{ [%battery%] [%cpu%] [%memory%] [%dynnetwork%]  <fc=#1fe0c7>%date%</fc> "
+  , template = "%StdinReader% }{ [%battery%] [%cpu%] [%memory%] [%eth0%] [%tun0%]  <fc=#1fe0c7>%date%</fc> "
 
   -- plugins
   , commands = [
@@ -26,7 +26,16 @@ Config {
       "--template", "Mem: <usedratio>%"
       ] 10
 
-    , Run DynNetwork [
+    , Run Network "eth0" [
+      "--template", "<dev>: U:<tx>kB/s|D:<rx>kB/s"
+      , "--Low", "204800"
+      , "--High", "1048576"
+      , "--low", "#2dd24b"
+      , "--normal", "#d4a025"
+      , "--high", "#ff1f1f"
+      ] 10
+
+    , Run Network "tun0" [
       "--template", "<dev>: U:<tx>kB/s|D:<rx>kB/s"
       , "--Low", "204800"
       , "--High", "1048576"

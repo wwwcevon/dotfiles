@@ -48,9 +48,9 @@ else
   PS1='\[\e[1;32m\]\h\[\e[m\] ' # host
 fi
 PS1=$PS1'\[\e[1;34m\]\W\[\e[m\] ' # wd
-if [[ -n "$(command -v rbenv)" ]]; then
-  PS1=$PS1'\[\e[1;33m\]$(__rbenv_ps1)\[\e[m\]' # rbenv version
-fi
+# if [[ -n "$(command -v rbenv)" ]]; then
+#   PS1=$PS1'\[\e[1;33m\]$(__rbenv_ps1)\[\e[m\]' # rbenv version
+# fi
 if [[ $(function_exists __git_ps1) == 'function' ]]; then
   PS1=$PS1'\[\e[1;32m\]$(__parse_git)\[\e[m\]' # git
 fi

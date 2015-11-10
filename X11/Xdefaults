@@ -24,6 +24,7 @@ URxvt*font:              xft:DejaVuSansMono:size=10:bold, \
                          xft:Kochi Mincho:size=10
 URxvt*termName:          xterm-256color
 URxvt*loginShell:        true
+URxvt.saveLines:	 100000
 
 ! ! -*- { theming tango
 

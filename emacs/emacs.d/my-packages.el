@@ -25,6 +25,7 @@
     monokai-theme
 
     ;; modes
+    cmake-mode
     coffee-mode
     emmet-mode
     go-mode

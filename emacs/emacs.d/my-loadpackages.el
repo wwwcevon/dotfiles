@@ -70,6 +70,7 @@
 (add-to-list 'auto-mode-alist '("\\.jinja\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mako$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
 (setq web-mode-engines-alist
       '(("php" . "\\.phtml\\'")
 	("django" . "\\.jinja\\'")))
@@ -134,6 +135,7 @@
 	     (set-visual-wrap-column 78)))
 
 
+
 ;; w3m
 (require 'w3m)
 (setq w3m-home-page "http://emacs-w3m.namazu.org/")
@@ -162,9 +164,19 @@
 	    (setq c-default-style "linux"
 		  c-indent-tab-mode t
 		  tab-width 8
-		  c-basic-offset 8)))
+		  c-basic-offset 8)
+	    (setq flycheck-gcc-language-standard "gnu11")))
 
 
+;; cmake-mode
+(require 'cmake-mode)
+
+
+;; mo-mode
+(load "~/.emacs.d/mo-mode.el")
+(require 'mo-mode)
+(add-to-list 'completion-ignored-extensions ".mo")
+(add-to-list 'completion-ignored-extensions ".gmo")
 
 ;; gentoo
 (if (package-installed-p 'site-gentoo)

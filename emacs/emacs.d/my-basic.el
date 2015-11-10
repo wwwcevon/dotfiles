@@ -13,14 +13,28 @@
 ;; disable menu bar
 (menu-bar-mode -99)
 ;; disable tool bar
-(if (window-system)
-    (progn
-     (tool-bar-mode -1)
-     (global-set-key (kbd "C-2") 'set-mark-command)
-     (scroll-bar-mode -1)))
+
+
+;; (if (window-system)
+;;     (progn
+;;       (tool-bar-mode -1)
+;;       (global-set-key (kbd "C-2") 'set-mark-command)
+;;       (scroll-bar-mode -1)))
+
+(tool-bar-mode -1)
+(global-set-key (kbd "C-2") 'set-mark-command)
+(scroll-bar-mode -1)
 
 ;; delete all trailing white spaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+(add-hook 'buffer-list-update-hook
+	  (lambda()
+	    (progn
+	      (tool-bar-mode -1)
+	      (global-set-key (kbd "C-2") 'set-mark-command)
+	      (scroll-bar-mode -1))))
 
 ;; goto-line
 (global-set-key (kbd "C-l") 'goto-line)
