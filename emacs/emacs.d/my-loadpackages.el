@@ -178,6 +178,10 @@
 (add-to-list 'completion-ignored-extensions ".mo")
 (add-to-list 'completion-ignored-extensions ".gmo")
 
+
+;; robe
+(add-hook 'ruby-mode-hook 'robe-mode)
+
 ;; gentoo
 (if (package-installed-p 'site-gentoo)
     (require 'site-gentoo))

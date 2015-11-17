@@ -50,6 +50,7 @@
     highlight-indentation
     jedi
     mew
+    robe
     undo-tree
     visual-regexp
     yasnippet
