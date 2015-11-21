@@ -238,9 +238,10 @@ myManageHook = composeAll
 
 myStartupHook :: X()
 myStartupHook = do spawn "fcitx"
-                   spawn "trayer-srg --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x262626 --heighttype pixel --height 23"
+                   spawn "killall -u root trayer-srg trayer-srg --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x262626 --heighttype pixel --height 23"
                    spawn "feh --bg-fill ~/.awesomebg"
-                   spawn "xwrits +idle=2 +finger +clock +breakclock +top +mouse t=37 b=3 max=7 +multiply=:7 after=7 b=5 max=77 +multiply=:.07 flash=:.07"
+                   spawn "killall -u root xwrits && xwrits +idle=2 +finger +clock +breakclock +top +mouse t=37 b=3 max=7 +multiply=:7 after=7 b=5 max=77 +multiply=:.07 flash=:.07"
+                   spawn "/usr/bin/synergys -f -c /root/.synergy.conf"
 
 main :: IO()
 main = do
