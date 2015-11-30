@@ -36,10 +36,10 @@ export PS1="\u@\h \W \$ "
 # load functions
 . $HOME/.bash_functions
 
-if [[ -d $HOME/.rbenv ]]; then
-  export PATH="$HOME/.rbenv/bin/:$PATH"
-  eval "$(rbenv init -)"
-fi
+# if [[ -d $HOME/.rbenv ]]; then
+#   export PATH="$HOME/.rbenv/bin/:$PATH"
+#   eval "$(rbenv init -)"
+# fi
 
 # PS1='\[\e[1;32m\]θ\[\e[m\] ' # host
 if [[ $UID == 0 ]]; then

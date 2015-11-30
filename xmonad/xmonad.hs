@@ -236,12 +236,21 @@ myManageHook = composeAll
     ]
   ]
 
+
+my_spawn :: [Char] -> [Char] -> X()
+my_spawn x y = spawn cmd
+    where
+      cmd = "killall -u `id` " ++ x ++
+            "; command -v " ++ x ++
+            " && " ++ x ++ " " ++ y
+
+
 myStartupHook :: X()
-myStartupHook = do spawn "fcitx"
-                   spawn "killall -u root trayer-srg trayer-srg --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x262626 --heighttype pixel --height 23"
-                   spawn "feh --bg-fill ~/.awesomebg"
-                   spawn "killall -u root xwrits && xwrits +idle=2 +finger +clock +breakclock +top +mouse t=37 b=3 max=7 +multiply=:7 after=7 b=5 max=77 +multiply=:.07 flash=:.07"
-                   spawn "/usr/bin/synergys -f -c /root/.synergy.conf"
+myStartupHook = do my_spawn "fcitx" ""
+                   my_spawn "trayer-srg" "--edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x262626 --heighttype pixel --height 23"
+                   my_spawn "feh" "--bg-fill ~/.awesomebg"
+                   my_spawn "xwrits" "+idle=2 +finger +clock +breakclock +top +mouse +lock t=37 b=3 max=7 +multiply=:7 "
+                   my_spawn "compton" "-cC -O 0.1 -I 0.1 -D 5 -f -o 0.35"
 
 main :: IO()
 main = do
