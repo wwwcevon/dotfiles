@@ -20,6 +20,7 @@ import XMonad.Layout.IM
 import XMonad.Layout.LimitWindows
 import XMonad.Layout.MagicFocus
 import XMonad.Layout.Magnifier
+import XMonad.Layout.Minimize
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
@@ -94,6 +95,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
   -- move focus to the master window
   , ((modm, xK_m), windows W.swapMaster)
+
+  -- minimize the focused window
+  , ((modm, xK_n), withFocused minimizeWindow)
+
+  -- restore next minimized window
+  , ((modm .|. shiftMask, xK_n), sendMessage RestoreNextMinimizedWin)
 
   -- toggle fullscreen
   , ((modm, xK_f), sendMessage $ MToggle.Toggle FULL)
@@ -181,6 +188,7 @@ myTheme = (theme tangoTheme) { fontName = "xft:monospace:size=10:bold" }
 ---
 
 myLayout = avoidStruts $ smartBorders $ gap $ toggleFull
+           $ minimize
            $ onWorkspaces ["term"] (term)
            $ onWorkspaces ["web"] (web)
            $ onWorkspaces ["im"] (chat)
