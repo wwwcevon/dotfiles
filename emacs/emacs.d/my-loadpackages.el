@@ -165,7 +165,7 @@
 		  c-indent-tab-mode t
 		  tab-width 8
 		  c-basic-offset 8)
-	    (setq flycheck-gcc-language-standard "gnu11")))
+	    (setq flycheck-gcc-language-standard "c99")))
 
 
 ;; cmake-mode
@@ -178,6 +178,24 @@
 (add-to-list 'completion-ignored-extensions ".mo")
 (add-to-list 'completion-ignored-extensions ".gmo")
 
+;; highlight-indent
+(require 'highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'python-mode-hook 'highlight-indent-guides-mode)
+
+
+;; whitespace
+
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines))
+(global-whitespace-mode +1)
+(set-face-attribute 'whitespace-line nil
+		    :weight 'bold
+		    :slant 'italic
+		    :underline t
+		    :foreground "#A20C42"
+		    :background "#FC5C94")
 
 ;; robe
 (add-hook 'ruby-mode-hook 'robe-mode)
