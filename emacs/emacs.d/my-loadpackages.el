@@ -194,8 +194,8 @@
 		    :weight 'bold
 		    :slant 'italic
 		    :underline t
-		    :foreground "#A20C42"
-		    :background "#FC5C94")
+		    :foreground "#c2870f"
+		    :background "#fab20a")
 
 ;; robe
 (add-hook 'ruby-mode-hook 'robe-mode)
