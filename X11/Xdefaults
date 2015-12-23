@@ -1,6 +1,6 @@
 ! pseudo-transparent
 URxvt*transparent: true
-URxvt*.shading: 15
+URxvt*.shading: 20
 
 URxvt.depth: 32
 

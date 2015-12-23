@@ -132,8 +132,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- browser
   , ((modm, xK_q), spawn "firefox")
 
-  -- emacs
-  , ((modm, xK_s), spawn "emacs")
+  -- xtalk
+  , ((modm, xK_s), spawn "xtalk")
 
   -- pidgin
   , ((modm, xK_c), spawn "pidgin")

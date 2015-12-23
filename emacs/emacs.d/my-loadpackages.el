@@ -189,7 +189,7 @@
 (require 'whitespace)
 (setq whitespace-line-column 80) ;; limit line length
 (setq whitespace-style '(face lines))
-(global-whitespace-mode +1)
+(add-hook 'prog-mode-hook 'whitespace-mode)
 (set-face-attribute 'whitespace-line nil
 		    :weight 'bold
 		    :slant 'italic
@@ -199,6 +199,15 @@
 
 ;; robe
 (add-hook 'ruby-mode-hook 'robe-mode)
+
+;; jdee
+(require 'jdee)
+
+;; markdown
+(require 'markdown-mode)
+(add-hook 'markdown-mode-hook '(lambda ()
+				 (setq indent-tabs-mode nil)))
+
 
 ;; gentoo
 (if (package-installed-p 'site-gentoo)

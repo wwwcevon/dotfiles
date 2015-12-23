@@ -28,6 +28,7 @@
     cmake-mode
     coffee-mode
     emmet-mode
+    erlang
     go-mode
     haskell-mode
     jade-mode
@@ -48,6 +49,7 @@
     ac-emmet
     flycheck
     highlight-indentation
+    jdee
     jedi
     mew
     robe
