@@ -1,48 +1,150 @@
-"
-" !!! AR's vimrc !!!
-"
-set nocompatible
-filetype off
-
-"
-" !!! basic settings !!!
-"
-set backspace=indent,eol,start
-set history=50
-set autoindent
+"============== common ============"
+set smartcase
+set smarttab
 set smartindent
-set softtabstop=2
-set expandtab
-set nobackup
-set modeline
-syntax on
-
-"
-" !!! ui !!!
-"
+set autoindent
+"set nu
 set ruler
-set showcmd
-set incsearch
-set hlsearch
-set laststatus=2
-set showtabline=2
-" set cursorcolumn
-set cursorline
-hi cursorline gui=UNDERLINE cterm=UNDERLINE
-
-" remove all trailing whitespaces
+"set showcmd
+" 保存的时候去除行尾空格
 autocmd BufWritePre * :%s/\s\+$//e
+" 高亮显示当前行/列
+set cursorline
+set cursorcolumn
+" 高亮显示搜索结果
+set hlsearch
+" 禁止折行
+set nowrap
+" 自适应不同语言的智能缩进
+filetype indent on
+" 将制表符扩展为空格
+set expandtab
+" 设置编辑时制表符占用空格数
+set tabstop=2
+" 设置格式化时制表符占用空格数
+set shiftwidth=2
+" 让 vim 把连续数量的空格视为一个制表符
+set softtabstop=2
+" 基于缩进或语法进行代码折叠
+set foldmethod=indent
+set foldmethod=syntax
+" 启动 vim 时关闭折叠代码
+set nofoldenable
+" 80行
+set colorcolumn=80
+" auto reload
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+" invisible character
+set list " Show trailing whitespace
+set listchars=tab:>\ ,trail:\ ,extends:#,nbsp:\ " Highlight problematic whitespace
+"change dir of swp file
+set backupdir=~/.vim/backup_files//
+set directory=~/.vim/swap_files//
+set undodir=~/.vim/undo_files//
 
-autocmd BufReadPost *
-\ if line("'\"") > 1 && line("'\"") <= line("$") |
-\   exe "normal! g`\"" |
-\ endif
+"==============" vundle ============"
+set nocompatible
+"filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'scrooloose/syntastic'
+Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplcache.vim'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'rayburgemeestre/phpfolding.vim'
+Plugin 'Shougo/vimproc'
+Plugin 'Shougo/unite.vim'
+Plugin 'm2mdas/phpcomplete-extended'
+Plugin 'majutsushi/tagbar'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-fugitive'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
+"Plugin 'lvht/phpcd.vim'
 
 
-"
-" !!! key bindings !!!
-"
+"============== bundle ============"
+execute pathogen#infect()
+filetype plugin indent on
 
-" normal mode
-nmap <SPACE> <SPACE>:noh<CR>
-set clipboard=exclude:.*
+"============== theme ================"
+set t_Co=256
+syntax enable
+colorscheme gruvbox
+"============== solarized ============"
+"execute pathogen#infect()
+"syntax enable
+"set background=dark
+"colorscheme solarized
+
+"============== NERDTree ============"
+map <C-\> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
+
+"============== airline ============"
+set laststatus=2
+" Use powerline patched fonts
+let g:airline_powerline_fonts = 1
+" automatically displays all buffers when there's only one tab open
+let g:airline#extensions#tabline#enabled = 1
+" theme airline
+let g:airline_theme = 'gruvbox'
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+
+"============== neocomplcache ======="
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+
+"============== emmet ==============="
+let g:user_emmet_settings = {
+\   'php' : {
+\     'extends' : 'html',
+\     'filters' : 'c',
+\   },
+\   'xml' : {
+\     'extends' : 'html',
+\   },
+\   'haml' : {
+\     'extends' : 'html',
+\   },
+\ }
+
+"============== phpcomplete_extend ======="
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd CompleteDone * pclose
+let g:phpcomplete_index_composer_command = 'composer'
+let g:phpcomplete_use_hhvm = 1
+
+"============== tagbar ==================="
+map <Leader>t :TagbarToggle<CR>
+
+"============== supertab ================="
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+"============== phpcd ===================="
+"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+
+"============== jedi ====================="
+let g:jedi#auto_initialization = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#use_tabs_not_buffers = 1
